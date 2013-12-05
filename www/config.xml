@@ -16,7 +16,6 @@
         BUREAU54 GMBH
     </author>
 
-    <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
     <!--
         Enable individual API permissions here.
         The "device" permission is required for the 'deviceready' event.
