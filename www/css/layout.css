@@ -141,7 +141,7 @@ footer.konfigurator{
 	position:absolute;
     top:0px;
 	width:768px;
-	left:150px;
+	left:50px;
 	background:transparent;
     opacity:0.0;
 	display:none;
@@ -149,9 +149,9 @@ footer.konfigurator{
 }
 #controls{
 	position:absolute;
-	width:120px;
-	left:20px;
-	top:120px;
+	width:768px;
+	left:50px;
+	top:650px;
 	background:transparent;
     opacity:0.0;
 	display:none;
@@ -164,7 +164,7 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:150px;
+	left:50px;
 	top:120px;
 }
 #raum-schatten{
@@ -174,7 +174,7 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:150px;
+	left:50px;
 	top:120px;
 
 }
@@ -185,7 +185,7 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:150px;
+	left:50px;
 	top:120px;
 
 }
@@ -197,7 +197,7 @@ footer.konfigurator{
 	background:transparent;
     opacity:0.0;
 	display:none;
-	left:150px;
+	left:50px;
 	top:120px;
  
 }

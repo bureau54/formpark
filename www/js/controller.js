@@ -546,6 +546,7 @@ function animate3DRoom(type){
         // Animation complete.
       });
 		
+	  jQuery('html').css('background', 'rgba(0, 0, 0, 0.8)');
 	  jQuery('#topSpacer').addClass('hidden');
 	  jQuery('#topLine').addClass('hidden');
 	  jQuery('#konfigurator').addClass('hidden');
@@ -564,7 +565,7 @@ function animate3DRoom(type){
         jQuery('#raum, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').css('display', 'none');	
       });
 
-	
+	  jQuery('html').css('background', 'transparent');
 	  jQuery('#topSpacer').removeClass('hidden');
 	  jQuery('#topLine').removeClass('hidden');
 	  jQuery('#konfigurator').removeClass('hidden');

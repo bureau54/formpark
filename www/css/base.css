@@ -224,6 +224,7 @@ table tr td.highlight					{ background-color:#333;  }
 .text-right    							{ text-align:right; }
 .text-center   							{ text-align:center; }
 .text-justify  							{ text-align:justify; }
+.text-invers                            { color:#fff;}
 
 .normal									{ font-weight:normal; }
 .bold          							{ font-weight:bold; }
