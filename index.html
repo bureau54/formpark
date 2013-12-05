@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Formpark Konfigurator</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/amazium.css">
+	<link rel="stylesheet" href="css/layout.css">
+    
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="css/jquery.gridster.css">
+    
+	
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
+	
+	<!-- To Top scripts -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+	<script src="js/jquery.gridster.js"></script>
+    
+	
+	<script src="js/controller.js" type="text/javascript"></script>
+    
+	
+</head>
+<body>
+
+
+
+<div id="topSpacer" class="spacer"></div>
+
+<div id="topLine" class="row ">
+  <div class="grid_12"><hr/></div>
+</div>
+
+
+<div id="konfigurator">
+
+  <div class="row">
+    <div class="grid_12 page-header-row">
+    
+      <h2>Der Konfigurator</h2><h4 class="subtitle">Meine Wunsch-Verlegung</h4>
+      <a href="#"><h2 id="3dview" class="fui-arrow-right float-right" style="padding-top:20px;"></h2></a>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="grid_12">
+      <p class="btn js-seralize">Parkettmuster speichern <span class="fui-plus"></span></p>
+      <p class="btn js-deleteAll">Parkett entfernen <span class="fui-cross"></span></p>
+    </div>
+  </div>
+  
+  <div class="row ">
+    <div class="grid_12"><hr/></div> 
+  </div>
+
+</div>
+
+<div class="wrapper">
+
+<div class="row">
+  <div class="grid_12">
+
+  <div class="konfigurator-container">
+  
+    <div class="gridster">
+      <ul>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="parquet">
+  
+  <div id="stage">
+    <!--<div id="formpark-parquet">
+      <div class="face bottom"></div>
+    </div>
+    -->
+ 
+    <div id="rotate-x" class="container">
+      <div id="newFloor" class="panel"></div>
+    </div>
+  </div>
+
+  
+</div>
+  
+<div id="raum">
+  <img src="images/rooms/wand-1800x1200.png"/>
+</div>
+
+<div id="raum-schatten">
+  <img src="images/rooms/schatten-1800x1200.png"/>
+</div>
+<div id="raum-moebel" data-src="1" data-src-max="2">
+  <img src="images/rooms/moebel-1800x1200_1.png"/>
+</div>
+
+<div id="titel-control">
+  <div id="topSpacer" class="spacer"></div>
+  <div id="topLine" class="row ">
+    <div class="grid_12"><hr/></div>
+  </div>
+  <div class="row">
+    <div class="grid_12 page-header-row">
+    
+      <h2>Der Konfigurator</h2><h4 class="subtitle">Meine Farbe, meine Sortierung, mein Typ</h4>
+      <a href="#"><h2 id="close3dview" class="fui-cross float-right"></h2></a>
+    </div>
+  </div>
+</div>
+
+<div id="controls">
+
+    <div id="eiche-14-strips" class="parquetChooser float-left" style="margin:0 20px 20px 0;">
+      <div class="strip-eiche-14-520_q_1 float-left" style="width:80px; height:80px; margin-right:10px;"></div>
+      <p class="float-left">Eiche 14</p>
+    </div>
+
+    <div id="eiche-35-strips" class="parquetChooser float-left" style="margin:0 20px 20px 0;">
+      <div class="strip-eiche-35-520_q_1 float-left" style="width:80px; height:80px; margin-right:10px;"></div>
+      <p class="float-left">Eiche 35</p>
+    </div>
+
+    <div id="eiche-14-ger-strips" class="parquetChooser float-left" style="margin:0 20px 20px 0;">
+      <div class="strip-eiche-ger-14-520_q_1 float-left" style="width:80px; height:80px; margin-right:10px;"></div>
+      <p class="float-left">Eiche <br> geräuchert 14</p>
+    </div>
+
+    <div id="eiche-24-ger-strips" class="parquetChooser float-left" style="margin:0 20px 20px 0;">
+      <div class="strip-eiche-ger-24-520_q_1 float-left" style="width:80px; height:80px; margin-right:10px;"></div>
+      <p class="float-left">Eiche <br> geräuchert 24</p>
+    </div>
+
+    <div id="eiche-14-avorio-strips" class="parquetChooser float-left" style="margin:0 20px 20px 0;">
+      <div class="strip-eiche-avorio-14-520_q_1 float-left" style="width:80px; height:80px; margin-right:10px;"></div>
+      <p class="float-left">Eiche <br> Avorio 14</p>
+    </div>
+    
+
+
+    <div class="clear"></div>
+    <div id="roomSwitch">
+      <h3 class="fui-arrow-right float-left"></h3>
+      <h3>Inneneinrichtung wechseln</h3>
+    </div>
+
+
+
+</div>
+
+
+<div id="verlegeplan">
+  <div class="row ">
+    <div class="grid_12"><hr/></div>
+  </div>
+  
+  <div class="row">
+    <div class="grid_12 page-header-row">
+    
+      <h2>Formpark</h2><h4 class="subtitle">Verlege-Datenblatt</h4>
+      <a href="#"><h2 id="closePlan" class="fui-cross float-right" style="font-color:#000; padding-top:20px;"></h2></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="verlegeplan-muster" class="grid_12"></div>
+  </div>
+  <div class="row">
+    <div id="verlegeplan-facts" class="grid_12"></div>
+  </div>
+  <div class="row">
+    <div class="grid_12">
+      <hr/>
+      <p class="bold">Bauwerk Parkett AG, CH-9430 St. Margrethen</p>
+    </div>
+  </div>
+
+</div>
+
+
+<footer>
+
+  <div class="row ">
+    <div class="grid_12"><hr/></div> 
+  </div>
+
+<div class="row">
+
+  <div class="grid_6">
+
+    <div style="float:left; margin:0 10px 0 0;">
+      <div id="fp780" class="formpark formpark-780"></div>
+      <p>Formpark 780</p>
+    </div>
+    <div style="float:left;">
+      <div id="fp520" class="formpark formpark-520"></div>
+      <p>Formpark 520</p>
+    </div>
+
+  </div>
+  
+  <div class="grid_6">
+    <div class="grid_3">
+    
+    <div class="musterauswahl">
+      <p>Vorverlegte Muster wählen:</p>
+      <select id="musterPresets">
+        <option value ="1">Muster 1</option>
+        <option value ="2">Muster 2</option>
+      </select>
+      <div id="muster-save"></div>
+    </div>
+    
+  </div>
+  
+  <div class="grid_3">
+    <p id="datenblatt-calc" class="btn">Verlege-Datenblatt drucken</p>
+  </div>
+
+
+  </div>
+  
+</div>
+
+</footer>
+
+</body>
+</html>

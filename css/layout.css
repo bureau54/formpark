@@ -1,0 +1,532 @@
+/* 
+* BUREAU54 LAYOUT.CSS STRUCTURE
+* based on Mike Ballan amazium.co.uk
+* copyright 2013 bureau54.com
+* www.bureau54.com
+*/
+
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body{
+	margin: 0 0 180px 0;
+	overflow:hidden;
+	
+	
+}
+.wrapper{
+	position:relative;
+	min-height:100%;
+}
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 180px;
+    width: 100%;
+}
+
+/***** Screen 960px *****/
+
+.logo{
+	width:180px;
+	height:auto;
+}
+::-moz-selection {
+	background-color:#cec6bb;
+	color: #fff;
+}
+
+::selection {
+	background-color: #cec6bb;
+	color: #fff;
+}
+
+
+h1 									        	{font-size:56px; line-height:56px; color:#000; text-transform:uppercase; }
+h2										        {font-size:36px; line-height:46px; color:#000; }
+h3										        {font-size:24px; line-height:28px; color:#000; }
+h4.subtitle										{font-size:24px; line-height:28px; color:#000; margin:0 0 0 10px; font-style:italic; }
+
+p 										        {font-size:16px; margin:0; padding:0 0 10px 0; line-height:20px; }
+p.made                                          {font-size:12px; text-transform:uppercase;}
+.page-header-row{
+	min-height:100px;
+}
+
+.parkett-navi-container{
+	width:100%;
+	min-height:350px;
+	padding:80px;
+	overflow:hidden;
+}
+.primary-navigation-container{
+	position:relative;
+	float:right;
+	padding-right:35px;
+
+}
+.footer{
+	margin:0 auto;
+	width:100%;
+	bottom:30px;
+}
+footer.konfigurator{
+	
+}
+
+.parquetChooser:hover{
+	cursor:pointer;
+}
+.parquetChooser div{
+	width:30px;
+	height:30px;
+}
+#roomSwitch:hover{
+	cursor:pointer;
+	
+}
+
+#raum, #raum-schatten, #raum-moebel, #stage, .container, #parquet{
+	width: 768px;
+	height: 512px;
+    margin: 0px auto;
+}
+#raum img, #raum-schatten img, #raum-moebel img{
+	height: 512px;
+   width: 768px;
+}
+
+.container{
+	position:relative;
+	
+    bottom:0px;
+	overflow:hidden;
+
+    
+-webkit-perspective: 800px;
+   -moz-perspective: 800px;
+     -o-perspective: 800px;
+        perspective: 800px;
+		
+-webkit-perspective-origin: 42% 60%;
+   -moz-perspective-origin: 42% 60%;
+     -o-perspective-origin: 42% 60%;
+        perspective-origin: 42% 60%;
+
+
+}
+#rotate-x .panel{
+	-webkit-transform: rotateX( 65deg );
+   -moz-transform: rotateX( 65deg );
+     -o-transform: rotateX( 65deg );
+        transform: rotateX( 65deg );
+		
+}
+
+.panel{
+	width: 100%;
+    height: 100%;
+	left:-150px;
+    position: absolute;
+}
+
+#stage{
+   position:absolute;
+   overflow:hidden;
+}
+#titel-control{
+	position:absolute;
+    top:0px;
+	width:768px;
+	left:150px;
+	background:transparent;
+    opacity:0.0;
+	display:none;
+	
+}
+#controls{
+	position:absolute;
+	width:120px;
+	left:20px;
+	top:120px;
+	background:transparent;
+    opacity:0.0;
+	display:none;
+}
+
+#raum{
+	position:absolute;
+	width:100%;
+    background: transparent;
+	overflow:hidden;
+    opacity:0.0;
+	display:none;
+	left:150px;
+	top:120px;
+}
+#raum-schatten{
+	position:absolute;
+	width:100%;
+    background: transparent;
+	overflow:hidden;
+    opacity:0.0;
+	display:none;
+	left:150px;
+	top:120px;
+
+}
+#raum-moebel{
+	position:absolute;
+	width:100%;
+    background: transparent;
+	overflow:hidden;
+    opacity:0.0;
+	display:none;
+	left:150px;
+	top:120px;
+
+}
+#parquet{
+	position:absolute;
+	margin:0;
+	padding:0;
+    width:100%;
+	background:transparent;
+    opacity:0.0;
+	display:none;
+	left:150px;
+	top:120px;
+ 
+}
+
+.formpark {
+   border: 1px solid #cec6bb;
+}
+.formpark-inner{
+	margin:5px;
+	font-size:14px;
+}
+.formpark-language {
+  width: 50px;
+  height: 100px;
+  border: 1px solid #cec6bb;
+}
+.formpark-language:hover, .formpark-language a:hover {
+	color:#fff;
+	cursor:pointer;
+	text-decoration:none;
+}
+.formpark:hover, .formpark a:hover {
+  background-color: #cec6bb;
+  color:#fff;
+  cursor:pointer;
+  text-decoration:none;
+}
+.formpark-520 {
+  width: 80px;
+  height: 40px;
+  
+}
+.formpark-520-portrait {
+  width: 40px;
+  height: 80px;
+  
+}
+.formpark-780 {
+  width: 128px;
+  height: 40px;
+  
+}
+.formpark-780-portrait {
+  width: 40px;
+  height: 128px;
+  
+}
+#verlegeplan{position: absolute; display:none; background-color:#fff; top:0px; left:0px; z-index:500;}
+#verlegeplan-muster{min-height:850px;}
+
+
+@media print { 
+
+ #konfigurator{display:none;}
+ #wrapper{display:none;}
+ footer{display:none;}
+ .row {margin-left: 20px;}
+
+
+
+}
+
+/***** Screen Bigger than 960px *****/
+@media only screen and (min-width:1200px) {
+
+.wrapper{
+	position:relative;
+	min-height:100%;
+}
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 180px;
+    width: 100%;
+}
+
+/***** Screen 960px *****/
+
+.logo{
+	width:180px;
+	height:auto;
+}
+::-moz-selection {
+	background-color:#cec6bb;
+	color: #fff;
+}
+
+::selection {
+	background-color: #cec6bb;
+	color: #fff;
+}
+
+
+h1 									        	{font-size:72px; line-height:72px; color:#000; text-transform:uppercase; }
+h2										        {font-size:46px; line-height:56px; color:#000; }
+h3										        {font-size:30px; line-height:34px; color:#000; }
+h4.subtitle										{font-size:24px; line-height:30px; color:#000; margin:0 0 0 10px; font-style:italic; }
+
+p 										        {font-size:16px; margin:0; padding:0 0 10px 0; line-height:20px; }
+p.made                                          {font-size:12px; text-transform:uppercase;}
+.page-header-row{
+	min-height:100px;
+}
+
+.parkett-navi-container{
+	width:100%;
+	min-height:350px;
+	padding:80px;
+	overflow:hidden;
+}
+.primary-navigation-container{
+	position:relative;
+	float:right;
+	padding-right:35px;
+
+}
+.footer{
+	margin:0 auto;
+	width:100%;
+	bottom:30px;
+}
+footer.konfigurator{
+	
+}
+
+.parquetChooser:hover{
+	cursor:pointer;
+}
+#roomSwitch:hover{
+	cursor:pointer;
+	
+}
+
+#raum, #raum-schatten, #raum-moebel, #stage, .container, #parquet{
+	width: 1200px;
+	height: 800px;
+    margin: 0px auto;
+}
+#raum img, #raum-schatten img, #raum-moebel img{
+	height: 800px;
+   width: 1200px;
+}
+
+.container{
+	position:relative;
+	
+    bottom:0px;
+	overflow:hidden;
+
+    
+-webkit-perspective: 800px;
+   -moz-perspective: 800px;
+     -o-perspective: 800px;
+        perspective: 800px;
+		
+-webkit-perspective-origin: 42% 60%;
+   -moz-perspective-origin: 42% 60%;
+     -o-perspective-origin: 42% 60%;
+        perspective-origin: 42% 60%;
+
+
+}
+#rotate-x .panel{
+	-webkit-transform: rotateX( 65deg );
+   -moz-transform: rotateX( 65deg );
+     -o-transform: rotateX( 65deg );
+        transform: rotateX( 65deg );
+		
+}
+
+.panel{
+	width: 100%;
+    height: 100%;
+	left:-150px;
+    position: absolute;
+}
+
+#stage{
+   position:absolute;
+   overflow:hidden;
+}
+#titel-control{
+	position:absolute;
+    top:0px;
+	left:200px;
+	background:transparent;
+    opacity:0.0;
+	display:none;
+	
+}
+#controls{
+	position:absolute;
+	width:1200px;
+	left:200px;
+	top:950px;
+	background:transparent;
+    opacity:0.0;
+	display:none;
+}
+#raum{
+	position:absolute;
+    background: transparent;
+	overflow:hidden;
+    opacity:0.0;
+	display:none;
+	left:200px;
+	top:120px;
+}
+#raum-schatten{
+	position:absolute;
+    background: transparent;
+	overflow:hidden;
+    opacity:0.0;
+	display:none;
+	left:200px;
+	top:120px;
+
+}
+#raum-moebel{
+	position:absolute;
+    background: transparent;
+	overflow:hidden;
+    opacity:0.0;
+	display:none;
+	left:200px;
+	top:120px;
+
+}
+#parquet{
+	position:absolute;
+	margin:0;
+	padding:0;
+	background:transparent;
+    opacity:0.0;
+	display:none;
+	left:200px;
+	top:120px;
+ 
+}
+
+.formpark {
+   border: 1px solid #cec6bb;
+}
+.formpark-inner{
+	margin:5px;
+	font-size:14px;
+}
+.formpark-language {
+  width: 50px;
+  height: 100px;
+  border: 1px solid #cec6bb;
+}
+.formpark-language:hover, .formpark-language a:hover {
+	color:#fff;
+	cursor:pointer;
+	text-decoration:none;
+}
+.formpark:hover, .formpark a:hover {
+  background-color: #cec6bb;
+  color:#fff;
+  cursor:pointer;
+  text-decoration:none;
+}
+.formpark-520 {
+  width: 80px;
+  height: 40px;
+  
+}
+.formpark-520-portrait {
+  width: 40px;
+  height: 80px;
+  
+}
+.formpark-780 {
+  width: 128px;
+  height: 40px;
+  
+}
+.formpark-780-portrait {
+  width: 40px;
+  height: 128px;
+  
+}
+#verlegeplan{position: absolute; display:none; background-color:#fff; top:0px; left:0px; z-index:500;}
+#verlegeplan-muster{min-height:850px;}
+
+
+}
+
+
+
+/***** Tablet (Smaller than 959px) *****/
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+h4.subtitle										{font-size:24px; line-height:30px; color:#000; margin:0 0 0 10px; font-style:italic; }
+}
+
+
+
+/***** Phone (portrait 300px) *****/
+@media only screen and (max-width: 767px) {
+
+.logo{
+	width:120px;
+	height:auto;
+}
+h1 									        	{font-size:56px; line-height:56px; color:#000; text-transform:uppercase; }
+h2										        {font-size:36px; line-height:36px; color:#000; }
+h3										        {font-size:24px; line-height:30px; color:#000; }
+h4.subtitle										{font-size:18px; line-height:24px; color:#000; margin:0 0 0 0px; font-style:italic; }
+
+p
+
+}
+
+
+	
+/***** Phone (landscape 420px) *****/
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+
+
+}
+
+
+
+/***** Retina *****/
+@media only screen and (-webkit-min-device-pixel-ratio:1.5) {
+
+
+}
