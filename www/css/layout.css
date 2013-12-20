@@ -76,6 +76,9 @@ p.made                                          {font-size:12px; text-transform:
 footer.konfigurator{
 	
 }
+.parquetChooser{
+  width: 160px;
+}
 
 .parquetChooser:hover{
 	cursor:pointer;
