@@ -43,30 +43,19 @@
 
 <div id="topSpacer" class="spacer"></div>
 
-<div id="topLine" class="row ">
-  <div class="grid_12"><hr/></div>
-</div>
-
-
 <div id="konfigurator">
 
-  <div class="row">
+  <div class="row-full">
     <div class="grid_12 page-header-row">
     
       <h2>Der Konfigurator</h2><h4 class="subtitle">Meine Wunsch-Verlegung</h4>
-      <a href="#"><h2 id="3dview" class="fui-arrow-right float-right" style="padding-top:20px;"></h2></a>
-    </div>
-  </div>
+      <a href="#"><h2 id="3dview" class="fui-arrow-right float-right"></h2></a>
 
-  <div class="row ">
-    <div class="grid_12">
-      <p class="btn js-seralize">Parkettmuster speichern <span class="fui-plus"></span></p>
-      <p class="btn js-deleteAll">Parkett entfernen <span class="fui-cross"></span></p>
     </div>
   </div>
   
-  <div class="row ">
-    <div class="grid_12"><hr/></div> 
+  <div class="row-full-full">
+    <hr/> 
   </div>
 
 </div>
@@ -92,45 +81,41 @@
 <div id="parquet">
   
   <div id="stage">
-    <!--<div id="formpark-parquet">
-      <div class="face bottom"></div>
-    </div>
-    -->
- 
+
     <div id="rotate-x" class="container">
       <div id="newFloor" class="panel"></div>
     </div>
   </div>
-
   
 </div>
   
 <div id="raum">
-  <img src="images/rooms/wand-1800x1200.png"/>
+  <img src="images/rooms/wand-1800x1200-1.png"/>
 </div>
 
 <div id="raum-schatten">
-  <img src="images/rooms/schatten-1800x1200.png"/>
+  <img src="images/rooms/schatten-1800x1200-1.png"/>
 </div>
+
 <div id="raum-moebel" data-src="1" data-src-max="2">
-  <img src="images/rooms/moebel-1800x1200_1.png"/>
+  <img src="images/rooms/moebel-1800x1200_1-1.png"/>
 </div>
 
 <div id="titel-control">
   <div id="topSpacer" class="spacer"></div>
+  
+    <div class="row-full">
+    <div class="grid_12 page-header-row">
+         
+      <a href="#"><h2 id="close3dview" class="fui-arrow-left float-left"></h2></a>
 
-  <div class="row">
-    <div class="page-header-row">
-    
-      <h2 class="text-invers">Der Konfigurator</h2><h4 class="subtitle"><span class="text-invers">Meine Farbe, meine Sortierung, mein Typ</span></h4>
-      <a href="#"><h2 id="close3dview" class="fui-cross float-left text-invers" style="margin-right:20px;"></h2></a>
     </div>
   </div>
 </div>
 
 <div id="controls">
 
-    <div id="eiche-14-strips" class="parquetChooser float-left" style="margin:0 40px 20px 0;">
+    <div id="eiche-14-strips" class="parquetChooser float-left" style="margin:0 40px 20px 20px;">
       <div class="strip-eiche-14-520_q_1 float-left" style="width:50px; height:50px; margin-right:10px;"></div>
       <p class="text-invers">Eiche 14</p>
     </div>
@@ -154,30 +139,19 @@
       <div class="strip-eiche-avorio-14-520_q_1 float-left" style="width:50px; height:50px; margin-right:10px;"></div>
       <p class="text-invers">Eiche <br> Avorio 14</p>
     </div>
-    
-
-
-    <div class="clear"></div>
-    <div id="roomSwitch">
-      <h3 class="fui-arrow-right float-left text-invers"></h3>
-      <h3 class="text-invers">Inneneinrichtung wechseln</h3>
-    </div>
-
-
-
 </div>
 
 
 <div id="verlegeplan">
-  <div class="row ">
-    <div class="grid_12"><hr/></div>
+  <div class="row-full-full">
+    <hr/>
   </div>
   
-  <div class="row">
+  <div class="row-full-full">
     <div class="grid_12 page-header-row">
     
       <h2>Formpark</h2><h4 class="subtitle">Verlege-Datenblatt</h4>
-      <a href="#"><h2 id="closePlan" class="fui-cross float-right" style="font-color:#000; padding-top:20px;"></h2></a>
+      <a href="#"><h2 id="closePlan" class="fui-cross float-right" style="font-color:#000;"></h2></a>
     </div>
   </div>
 
@@ -199,28 +173,36 @@
 
 <footer>
 
-  <div class="row ">
-    <div class="grid_12"><hr/></div> 
+  <div class="row-full-full">
+    <hr/>
   </div>
 
-<div class="row">
+<div class="row" style="min-height:120px;">
 
-  <div class="grid_6">
-
-    <div style="float:left; margin:0 10px 0 0;">
+    <a href="#"><h3 id="verlegemusterAuswahl" class="fui-list float-left" style="color:#9c8c76; margin:70px 10px;"></h3></a>
+    <h4 class="float-left" style="font-size: 24px; color:#9c8c76; margin:70px 20px;">Zu den<br> Musterverlegungen</h4>
+    <div style="float:left; bottom:0px; margin:70px 20px 0 0;">
       <div id="fp780" class="formpark formpark-780"></div>
       <p>Formpark 780</p>
     </div>
-    <div style="float:left;">
+    <div style="float:left; margin:70px 20px 0 0;">
       <div id="fp520" class="formpark formpark-520"></div>
+       <p>Formpark 520</p>
+    </div>
+    <div style="float:left; width:40px;  margin:0 10px 0 0;">
+      <div id="fp780-portrait" class="formpark formpark-780-portrait"></div>
+    </div>
+    <div style="float:left; bottom:0px; margin:110px 20px 0 0;">
+      <p>Formpark 780</p>
+    </div>
+    <div style="float:left;width: 50px; margin-top: 47px">
+      <div id="fp520-portrait" class="formpark formpark-520-portrait"></div>
+    </div>
+    <div style="float:left; bottom:0px; margin:110px 20px 0 0;">
       <p>Formpark 520</p>
     </div>
 
-  </div>
-  
-  <div class="grid_6">
-    <div class="grid_3">
-    
+   
     <div class="musterauswahl">
       <p>Vorverlegte Muster wählen:</p>
       <select id="musterPresets">
@@ -230,18 +212,18 @@
       <div id="muster-save"></div>
     </div>
     
-  </div>
   
   <div class="grid_3">
     <p id="datenblatt-calc" class="btn">Verlege-Datenblatt drucken</p>
   </div>
 
 
-  </div>
-  
 </div>
+  
+
 
 </footer>
+
 
 </body>
 </html>

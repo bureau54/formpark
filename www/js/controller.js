@@ -30,12 +30,8 @@ function init(){
 	
   gridster = jQuery(".gridster > ul").gridster({
     widget_margins: [1, 1],
-    widget_base_dimensions: [20, 20],
+    widget_base_dimensions: [15, 15],
 	avoid_overlapped_widgets:true,
-	    resize: {
-            enabled: true
-
-        }
 
 
   }).data('gridster');
@@ -57,6 +53,30 @@ function init(){
   
       var widgets = [
           ['<li data-max-sizex="4" data-max-sizey="4"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2]
+      ];
+
+      jQuery.each(widgets, function(i, widget){
+          gridster.add_widget.apply(gridster, widget, 1, 1)
+      });
+	
+  });	
+
+  jQuery('#fp780-portrait').click(function(){
+	  
+	  var widgets = [
+          ['<li data-max-sizex="2" data-max-sizey="6"><div class="control del func-delete-v"><p class="fui-cross"></p></div></li>', 2, 6]
+      ];
+
+      $.each(widgets, function(i, widget){
+          gridster.add_widget.apply(gridster, widget,1, 1)
+      });
+	  
+  });	
+
+  jQuery('#fp520-portrait').click(function(){
+  
+      var widgets = [
+          ['<li data-max-sizex="2" data-max-sizey="4"><div class="control del func-delete-v"><p class="fui-cross"></p></div></li>', 2, 4]
       ];
 
       jQuery.each(widgets, function(i, widget){
@@ -115,11 +135,12 @@ function init(){
 	 
 	 drawParquetStrips();
 	 
-     jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
+	 jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
 	 jQuery("#verlegeplan").css('height', jQuery(document).height() + 'px');
 	 
 	 jQuery("#newFloor").html(jQuery('#verlegeplan-muster').html());
-	 
+	 jQuery(".rechts").css('opacity', '1.0');
+ 
 	 setParquetStripType(1);
 	 
      animate3DRoom('show');
@@ -546,7 +567,6 @@ function animate3DRoom(type){
         // Animation complete.
       });
 		
-	  jQuery('html').css('background', 'rgba(0, 0, 0, 0.8)');
 	  jQuery('#topSpacer').addClass('hidden');
 	  jQuery('#topLine').addClass('hidden');
 	  jQuery('#konfigurator').addClass('hidden');
@@ -565,7 +585,7 @@ function animate3DRoom(type){
         jQuery('#raum, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').css('display', 'none');	
       });
 
-	  jQuery('html').css('background', 'transparent');
+	
 	  jQuery('#topSpacer').removeClass('hidden');
 	  jQuery('#topLine').removeClass('hidden');
 	  jQuery('#konfigurator').removeClass('hidden');
@@ -591,6 +611,7 @@ function drawParquetStrips(){
 	 var anzV = 0;
 	 var offsetWidth = 0;
 	 var offsetHeight = 0;
+	 var scaleFactor = 12;
 	 
 	 
 	 jQuery(parquetMuster).each(function( index ) {
@@ -605,15 +626,15 @@ function drawParquetStrips(){
 	   
 	   if (sizeX > sizeY){
 	     if (sizeX > 4)
-		   parquetType= "fp-780";
+		   parquetType= "fp-780 rechts";
 		 else	   
-		   parquetType= "fp-520";
+		   parquetType= "fp-520 rechts";
 		   
 	   } else{
 	     if (sizeY > 4)
-		   parquetType= "fp-780";
+		   parquetType= "fp-780 links";
 		 else	   
-		   parquetType= "fp-520";
+		   parquetType= "fp-520 links";
 	   }
 	   
 	   
@@ -625,27 +646,27 @@ function drawParquetStrips(){
 	   if (col == 1)
 	     cssLeft = 0;
 	   else{
-		 cssLeft = (col-1) * 20;  
+		 cssLeft = (col-1) * scaleFactor;  
 	   }
 		 
 	   if (row == 1)
 	     cssTop = 0;
 	   else{
-		 cssTop = (row-1) * 20;
+		 cssTop = (row-1) * scaleFactor;
 		   
 	   }
 	   
-	   if ((cssLeft + sizeX*20) > offsetWidth){
-		   offsetWidth = cssLeft + sizeX*20;
+	   if ((cssLeft + sizeX*scaleFactor) > offsetWidth){
+		   offsetWidth = cssLeft + sizeX*scaleFactor;
 	   }
-	   if ((cssTop + sizeY*20) > offsetHeight){
-		   offsetHeight = cssTop + sizeY*20;
+	   if ((cssTop + sizeY*scaleFactor) > offsetHeight){
+		   offsetHeight = cssTop + sizeY*scaleFactor;
 	   }
 
        //var strip = getRandomParquetClass(1, 520);
 
 	   //draw parquet planket
-	   jQuery('#verlegeplan-muster').append("<div class='pattern formpark "+parquetType+"' data-class-base='pattern "+parquetType+"' style='position:absolute; top:"+ cssTop +"px; left:"+ cssLeft +"px; width:" + sizeX * 20 +"px; height:" + sizeY * 20 + "px;'></div>" );
+	   jQuery('#verlegeplan-muster').append("<div class='pattern formpark "+parquetType+"' data-class-base='pattern "+parquetType+"' style='position:absolute; top:"+ cssTop +"px; left:"+ cssLeft +"px; width:" + sizeX * scaleFactor +"px; height:" + sizeY * scaleFactor + "px;'></div>" );
 	   
 	   
      });

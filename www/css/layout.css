@@ -89,14 +89,19 @@ footer.konfigurator{
 	
 }
 
-#raum, #raum-schatten, #raum-moebel, #stage, .container, #parquet{
-	width: 768px;
-	height: 512px;
-    margin: 0px auto;
+#raum, #raum-schatten, #raum-moebel, #stage, .container{
+	width: 1024px;
+	height: 682px;
 }
+#parquet{
+	width: 1200px;
+	height: 800px;	
+	top:30px;
+}
+
 #raum img, #raum-schatten img, #raum-moebel img{
-	height: 512px;
-   width: 768px;
+   height: 682px;
+   width: 1024px;
 }
 
 .container{
@@ -138,20 +143,17 @@ footer.konfigurator{
    overflow:hidden;
 }
 #titel-control{
-	position:absolute;
+
     top:0px;
-	width:768px;
-	left:50px;
-	background:transparent;
+    background:transparent;
     opacity:0.0;
 	display:none;
 	
 }
 #controls{
 	position:absolute;
-	width:768px;
-	left:50px;
-	top:650px;
+	width:100%;
+	bottom:0px;
 	background:transparent;
     opacity:0.0;
 	display:none;
@@ -164,8 +166,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:50px;
-	top:120px;
+	left:0px;
+	top:0px;
 }
 #raum-schatten{
 	position:absolute;
@@ -174,8 +176,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:50px;
-	top:120px;
+	left:0px;
+	top:0px;
 
 }
 #raum-moebel{
@@ -185,8 +187,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:50px;
-	top:120px;
+	left:0px;
+	top:0px;
 
 }
 #parquet{
@@ -197,13 +199,14 @@ footer.konfigurator{
 	background:transparent;
     opacity:0.0;
 	display:none;
-	left:50px;
-	top:120px;
+	left:0px;
+	top:0px;
  
 }
 
 .formpark {
-   border: 1px solid #cec6bb;
+   border: 1px solid #fff;
+   background-color: #cec6bb;
 }
 .formpark-inner{
 	margin:5px;
@@ -245,11 +248,24 @@ footer.konfigurator{
   height: 128px;
   
 }
+
+.rechts{
+  background-color: #cec6bb;
+  opacity:0.8;
+	
+}
+
+.links{
+  background-color: #cec6bb;
+	
+}
 #verlegeplan{position: absolute; display:none; background-color:#fff; top:0px; left:0px; z-index:500;}
 #verlegeplan-muster{min-height:850px;}
 
 
 @media print { 
+
+  body {-webkit-print-color-adjust: exact;}
 
  #konfigurator{display:none;}
  #wrapper{display:none;}
@@ -335,7 +351,7 @@ footer.konfigurator{
 #raum, #raum-schatten, #raum-moebel, #stage, .container, #parquet{
 	width: 1200px;
 	height: 800px;
-    margin: 0px auto;
+   
 }
 #raum img, #raum-schatten img, #raum-moebel img{
 	height: 800px;
@@ -383,7 +399,6 @@ footer.konfigurator{
 #titel-control{
 	position:absolute;
     top:0px;
-	left:200px;
 	background:transparent;
     opacity:0.0;
 	display:none;
@@ -391,12 +406,12 @@ footer.konfigurator{
 }
 #controls{
 	position:absolute;
-	width:1200px;
-	left:200px;
-	top:950px;
-	background:transparent;
+	width:100%;
+	bottom:0px;
+	background:#333;
     opacity:0.0;
 	display:none;
+	padding-top:30px;
 }
 #raum{
 	position:absolute;
@@ -404,8 +419,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:200px;
-	top:120px;
+	left:0px;
+	top:0px;
 }
 #raum-schatten{
 	position:absolute;
@@ -413,8 +428,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:200px;
-	top:120px;
+	left:0px;
+	top:0px;
 
 }
 #raum-moebel{
@@ -423,8 +438,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:200px;
-	top:120px;
+	left:0px;
+	top:0px;
 
 }
 #parquet{
@@ -434,13 +449,14 @@ footer.konfigurator{
 	background:transparent;
     opacity:0.0;
 	display:none;
-	left:200px;
-	top:120px;
+	left:0px;
+	top:0px;
  
 }
 
 .formpark {
-   border: 1px solid #cec6bb;
+   border: 1px solid #fff;
+   background-color: #cec6bb;
 }
 .formpark-inner{
 	margin:5px;
