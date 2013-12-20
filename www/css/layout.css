@@ -143,9 +143,6 @@ footer.konfigurator{
    overflow:hidden;
 }
 #titel-control{
-
-    top:0px;
-    background:transparent;
     opacity:0.0;
 	display:none;
 	
@@ -154,9 +151,10 @@ footer.konfigurator{
 	position:absolute;
 	width:100%;
 	bottom:0px;
-	background:transparent;
+	background:#333;
     opacity:0.0;
 	display:none;
+	padding-top:30px;
 }
 
 #raum{
