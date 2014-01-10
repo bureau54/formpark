@@ -211,8 +211,14 @@ function init(){
   
   jQuery('.lazyOwl').click(function(e){
 	  
+	 var id = parseInt(jQuery(this).attr('data-source'));
 	 closeMsgContainer();
-	 getMusterPreset( parseInt(jQuery(this).attr('data-source')));
+	 showMsgContainer("Wunsch-Verlegung", "Ihre Musterauswahl wird aufbereitet.", true);
+	 setTimeout(function () {
+                    getMusterPreset(id);
+					closeMsgContainer();
+                 }, 1500);
+	 
 	 
 	//jQuery("#basis-controls").css('display', 'block');
 	//jQuery("#musterverlegungen-chooser").css('display', 'none');
