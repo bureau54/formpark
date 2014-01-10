@@ -57,7 +57,7 @@ table 									{ border-collapse:collapse; border-spacing:0; }
 	
 /***** Basic Styles *****/
 
-html 									{ overflow-y:scroll; overflow:-moz-scrollbars-vertical; }
+html 									{ overflow-y:hidden; overflow:hidden; }
 body									{ margin:0px 0 0 0; padding:0; font:13px "EB Garamond", "Trebuchet MS", Helvetica, sans-serif; color:#333; -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none; }
 div {background:transparent;}
 /***** Typography *****/
@@ -71,7 +71,7 @@ h4 										{ margin:0 0 0px 0; padding:0; font-size:18px; line-height:22px; co
 h5 										{ margin:0 0 0px 0; padding:0; font-size:14px; line-height:16px; color:#333; }
 h6 										{ margin:0 0 0px 0; padding:0; font-size:12px; line-height:16px; color:#333; }
 
-p 										{ margin:0; padding:0 0 0px 0; line-height:20px; color:#333; }
+p 										{ margin:0; padding:0 0 0px 0; line-height:20px; color:#333;font-family:"EB Garamond", "Times New Roman", Helvetica, Arial, sans-serif; }
 .help-block							    { color:#333; }
 
 strong 									{ font-weight:bold; }
@@ -178,7 +178,8 @@ img 									{ border:0; -ms-interpolation-mode:bicubic; }
 
 a.btn, .btn 							{ margin:5px 0 5px 0; padding:4px 10px 4px 10px; display:inline-block; color:#fff; background-color:#9c8c76; cursor:pointer; }
 a:hover.btn, .btn:hover					{ text-decoration:none; color:#fff; background-color:#9c8c76; opacity:0.8; }
-
+.btn-footer                             { background:#fff; color:#9c8c76; opacity:0.8;}
+.btn-dark{background:#333; color:#fff; margin:0px;}
 /***** Forms *****/
 
 #stylized-form							{ margin:10px 0 20px 0; padding:20px; background-color:#f4f4f4; -webkit-border-radius:4px; -moz-border-radius:4px; }
@@ -224,7 +225,6 @@ table tr td.highlight					{ background-color:#333;  }
 .text-right    							{ text-align:right; }
 .text-center   							{ text-align:center; }
 .text-justify  							{ text-align:justify; }
-.text-invers                            { color:#fff;}
 
 .normal									{ font-weight:normal; }
 .bold          							{ font-weight:bold; }
@@ -241,7 +241,9 @@ table tr td.highlight					{ background-color:#333;  }
 .hidden									{ display:none; }
 .hide 									{ display:none; }
 
-.spacer                                 { padding-bottom:30px;}
+.v-line                                 { border-left:1px solid #fff; margin-left:20px; margin-right:20px; float:left;}
+
+.spacer                                 { padding-bottom:20px;}
 
 @-moz-keyframes blink {0%{opacity:1;} 50%{opacity:0.2;} 100%{opacity:1;}} /* Firefox */
 @-webkit-keyframes blink {0%{opacity:1;} 50%{opacity:0.2;} 100%{opacity:1;}} /* Webkit */
@@ -411,991 +413,338 @@ you can use the generic selector below, but it's slower:
 }
 
 
+.fp-780{
+	background-size:cover;
+}
+.fp-520{
+   background-size:cover;
+}
+.rechts{}
+.links{}
 /***** Parquet Strips *****/
 .strip-eiche-14-520_q_1{
   background:url(../images/Eiche_14/520_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-14-520_q_2{
   background:url(../images/Eiche_14/520_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-14-520_q_3{
   background:url(../images/Eiche_14/520_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-14-520_q_4{
   background:url(../images/Eiche_14/520_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-14-520_q_5{
-  background:url(../images/Eiche_14/520_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_q_6{
-  background:url(../images/Eiche_14/520_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_q_7{
-  background:url(../images/Eiche_14/520_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_h_1{
-  background:url(../images/Eiche_14/520_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_h_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_h_2{
-  background:url(../images/Eiche_14/520_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_h_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_h_3{
   background:url(../images/Eiche_14/520_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-14-520_h_4{
-  background:url(../images/Eiche_14/520_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_h_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_h_5{
-  background:url(../images/Eiche_14/520_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_h_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_h_6{
-  background:url(../images/Eiche_14/520_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_h_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-520_h_7{
-  background:url(../images/Eiche_14/520_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/520_h_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_q_1{
-  background:url(../images/Eiche_14/780_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_q_2{
-  background:url(../images/Eiche_14/780_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_q_3{
-  background:url(../images/Eiche_14/780_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_q_4{
-  background:url(../images/Eiche_14/780_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_q_5{
-  background:url(../images/Eiche_14/780_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_q_6{
-  background:url(../images/Eiche_14/780_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_q_7{
-  background:url(../images/Eiche_14/780_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_h_1{
-  background:url(../images/Eiche_14/780_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_h_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_h_2{
-  background:url(../images/Eiche_14/780_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_h_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_h_3{
-  background:url(../images/Eiche_14/780_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_h_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_h_4{
-  background:url(../images/Eiche_14/780_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_h_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_h_5{
-  background:url(../images/Eiche_14/780_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_h_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_h_6{
-  background:url(../images/Eiche_14/780_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_h_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-14-780_h_7{
-  background:url(../images/Eiche_14/780_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_14/780_h_7.jpg);background-repeat:no-repeat;}
 
 .strip-eiche-35-520_q_1{
-  background:url(../images/Eiche_35/520_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_q_2{
-  background:url(../images/Eiche_35/520_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_q_3{
-  background:url(../images/Eiche_35/520_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_q_4{
-  background:url(../images/Eiche_35/520_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_q_5{
-  background:url(../images/Eiche_35/520_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_q_6{
-  background:url(../images/Eiche_35/520_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_q_7{
-  background:url(../images/Eiche_35/520_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_h_1{
-  background:url(../images/Eiche_35/520_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_h_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_h_2{
-  background:url(../images/Eiche_35/520_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_h_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_h_3{
-  background:url(../images/Eiche_35/520_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_h_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_h_4{
-  background:url(../images/Eiche_35/520_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_h_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_h_5{
   background:url(../images/Eiche_35/520_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-35-520_h_6{
-  background:url(../images/Eiche_35/520_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_h_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-520_h_7{
-  background:url(../images/Eiche_35/520_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/520_h_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_q_1{
-  background:url(../images/Eiche_35/780_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_q_2{
-  background:url(../images/Eiche_35/780_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_q_3{
-  background:url(../images/Eiche_35/780_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_q_4{
-  background:url(../images/Eiche_35/780_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_q_5{
-  background:url(../images/Eiche_35/780_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_q_6{
-  background:url(../images/Eiche_35/780_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_q_7{
-  background:url(../images/Eiche_35/780_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_h_1{
-  background:url(../images/Eiche_35/780_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_h_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_h_2{
-  background:url(../images/Eiche_35/780_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_h_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_h_3{
-  background:url(../images/Eiche_35/780_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_h_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_h_4{
-  background:url(../images/Eiche_35/780_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_h_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_h_5{
-  background:url(../images/Eiche_35/780_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_h_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_h_6{
-  background:url(../images/Eiche_35/780_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_h_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-35-780_h_7{
-  background:url(../images/Eiche_35/780_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_35/780_h_7.jpg);background-repeat:no-repeat;}
 
 .strip-eiche-avorio-14-520_q_1{
-  background:url(../images/Eiche_Avorio_14/520_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/520_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-520_q_2{
-  background:url(../images/Eiche_Avorio_14/520_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/520_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-520_q_3{
-  background:url(../images/Eiche_Avorio_14/520_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/520_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-520_q_4{
-  background:url(../images/Eiche_Avorio_14/520_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/520_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-520_q_5{
-  background:url(../images/Eiche_Avorio_14/520_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/520_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-520_q_6{
-  background:url(../images/Eiche_Avorio_14/520_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/520_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-520_q_7{
-  background:url(../images/Eiche_Avorio_14/520_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/520_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-520_h_1{
   background:url(../images/Eiche_Avorio_14/520_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-avorio-14-520_h_2{
   background:url(../images/Eiche_Avorio_14/520_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-avorio-14-520_h_3{
   background:url(../images/Eiche_Avorio_14/520_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-avorio-14-520_h_4{
   background:url(../images/Eiche_Avorio_14/520_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-avorio-14-520_h_5{
   background:url(../images/Eiche_Avorio_14/520_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-avorio-14-520_h_6{
   background:url(../images/Eiche_Avorio_14/520_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-avorio-14-520_h_7{
   background:url(../images/Eiche_Avorio_14/520_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-avorio-14-780_q_1{
-  background:url(../images/Eiche_Avorio_14/780_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_q_2{
-  background:url(../images/Eiche_Avorio_14/780_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_q_3{
-  background:url(../images/Eiche_Avorio_14/780_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_q_4{
-  background:url(../images/Eiche_Avorio_14/780_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_q_5{
-  background:url(../images/Eiche_Avorio_14/780_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_q_6{
-  background:url(../images/Eiche_Avorio_14/780_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_q_7{
-  background:url(../images/Eiche_Avorio_14/780_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_h_1{
-  background:url(../images/Eiche_Avorio_14/780_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_h_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_h_2{
-  background:url(../images/Eiche_Avorio_14/780_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_h_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_h_3{
-  background:url(../images/Eiche_Avorio_14/780_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_h_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_h_4{
-  background:url(../images/Eiche_Avorio_14/780_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_h_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_h_5{
-  background:url(../images/Eiche_Avorio_14/780_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_h_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_h_6{
-  background:url(../images/Eiche_Avorio_14/780_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_h_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-avorio-14-780_h_7{
-  background:url(../images/Eiche_Avorio_14/780_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_Avorio_14/780_h_7.jpg);background-repeat:no-repeat;}
 
 .strip-eiche-ger-14-520_q_1{
-  background:url(../images/Eiche_ger_14/520_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/520_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-520_q_2{
-  background:url(../images/Eiche_ger_14/520_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/520_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-520_q_3{
-  background:url(../images/Eiche_ger_14/520_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/520_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-520_q_4{
-  background:url(../images/Eiche_ger_14/520_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/520_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-520_q_5{
-  background:url(../images/Eiche_ger_14/520_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/520_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-520_q_6{
-  background:url(../images/Eiche_ger_14/520_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/520_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-520_q_7{
-  background:url(../images/Eiche_ger_14/520_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/520_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-520_h_1{
   background:url(../images/Eiche_ger_14/520_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-14-520_h_2{
   background:url(../images/Eiche_ger_14/520_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-14-520_h_3{
   background:url(../images/Eiche_ger_14/520_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-14-520_h_4{
   background:url(../images/Eiche_ger_14/520_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-14-520_h_5{
   background:url(../images/Eiche_ger_14/520_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-14-520_h_6{
   background:url(../images/Eiche_ger_14/520_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-14-520_h_7{
   background:url(../images/Eiche_ger_14/520_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-14-780_q_1{
-  background:url(../images/Eiche_ger_14/780_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_q_2{
-  background:url(../images/Eiche_ger_14/780_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_q_3{
-  background:url(../images/Eiche_ger_14/780_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_q_4{
-  background:url(../images/Eiche_ger_14/780_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_q_5{
-  background:url(../images/Eiche_ger_14/780_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_q_6{
-  background:url(../images/Eiche_ger_14/780_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_q_7{
-  background:url(../images/Eiche_ger_14/780_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_h_1{
-  background:url(../images/Eiche_ger_14/780_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_h_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_h_2{
-  background:url(../images/Eiche_ger_14/780_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_h_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_h_3{
-  background:url(../images/Eiche_ger_14/780_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_h_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_h_4{
-  background:url(../images/Eiche_ger_14/780_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_h_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_h_5{
-  background:url(../images/Eiche_ger_14/780_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_h_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_h_6{
-  background:url(../images/Eiche_ger_14/780_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_h_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-14-780_h_7{
-  background:url(../images/Eiche_ger_14/780_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_14/780_h_7.jpg);background-repeat:no-repeat;}
 
 .strip-eiche-ger-24-520_q_1{
-  background:url(../images/Eiche_ger_24/520_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/520_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-520_q_2{
-  background:url(../images/Eiche_ger_24/520_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/520_q_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-520_q_3{
-  background:url(../images/Eiche_ger_24/520_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/520_q_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-520_q_4{
-  background:url(../images/Eiche_ger_24/520_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/520_q_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-520_q_5{
-  background:url(../images/Eiche_ger_24/520_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/520_q_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-520_q_6{
-  background:url(../images/Eiche_ger_24/520_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/520_q_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-520_q_7{
-  background:url(../images/Eiche_ger_24/520_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/520_q_7.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-520_h_1{
   background:url(../images/Eiche_ger_24/520_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-24-520_h_2{
   background:url(../images/Eiche_ger_24/520_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-24-520_h_3{
   background:url(../images/Eiche_ger_24/520_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-24-520_h_4{
   background:url(../images/Eiche_ger_24/520_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-24-520_h_5{
   background:url(../images/Eiche_ger_24/520_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-24-520_h_6{
   background:url(../images/Eiche_ger_24/520_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-24-520_h_7{
   background:url(../images/Eiche_ger_24/520_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
 }
 .strip-eiche-ger-24-780_q_1{
-  background:url(../images/Eiche_ger_24/780_q_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_q_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-780_q_2{
   background:url(../images/Eiche_ger_24/780_q_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
+  
 }
 .strip-eiche-ger-24-780_q_3{
   background:url(../images/Eiche_ger_24/780_q_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
+  
 }
 .strip-eiche-ger-24-780_q_4{
   background:url(../images/Eiche_ger_24/780_q_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
+  
 }
 .strip-eiche-ger-24-780_q_5{
   background:url(../images/Eiche_ger_24/780_q_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
+  
 }
 .strip-eiche-ger-24-780_q_6{
   background:url(../images/Eiche_ger_24/780_q_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
+ 
 }
 .strip-eiche-ger-24-780_q_7{
   background:url(../images/Eiche_ger_24/780_q_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
+  
 }
 .strip-eiche-ger-24-780_h_1{
-  background:url(../images/Eiche_ger_24/780_h_1.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_h_1.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-780_h_2{
-  background:url(../images/Eiche_ger_24/780_h_2.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_h_2.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-780_h_3{
-  background:url(../images/Eiche_ger_24/780_h_3.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_h_3.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-780_h_4{
-  background:url(../images/Eiche_ger_24/780_h_4.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_h_4.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-780_h_5{
-  background:url(../images/Eiche_ger_24/780_h_5.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_h_5.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-780_h_6{
-  background:url(../images/Eiche_ger_24/780_h_6.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_h_6.jpg);background-repeat:no-repeat;}
 .strip-eiche-ger-24-780_h_7{
-  background:url(../images/Eiche_ger_24/780_h_7.jpg);background-repeat:no-repeat;
-  -moz-background-size:cover;
-  -webkit-background-size: cover; 
-  -o-background-size: cover;  
-  background-size: cover;
-}
+  background:url(../images/Eiche_ger_24/780_h_7.jpg);background-repeat:no-repeat;}
 
 /***** Back to Top *****/
 

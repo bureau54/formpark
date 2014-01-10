@@ -33,7 +33,7 @@ ul {
 
 .gridster {
 	margin: 0 auto;
-	min-height:200px;
+	min-height:80px;
     -webkit-transition: opacity .6s;
     -moz-transition: opacity .6s;
     -o-transition: opacity .6s;

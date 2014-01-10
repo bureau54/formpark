@@ -13,12 +13,11 @@ jQuery(document).ready(function(){
 	init();	
 	
 
-
-
-
 });
 
 jQuery(window).load(function(){
+	
+	showMsgContainer('Herzlich willkommen im Formpark-Konfigurator', '<li>1. Gewünschte Verlegung wählen</li><li>2. Musterverlegung in den Raum legen</li><li>3. Farbe und Sortierung wählen</li><li>4. Raumsituation wählen</li>', false);
 	
   
 			
@@ -36,11 +35,28 @@ function init(){
 
   }).data('gridster');
   
+  
+  jQuery("#owl-formpark").owlCarousel({
+	  items : 5, //10 items above 1000px browser width
+      itemsDesktop : [1000,4], //5 items between 1000px and 901px
+      itemsDesktopSmall : [900,4], // betweem 900px and 601px
+      itemsTablet: [600,4],
+      itemsMobile : false ,
+	  
+    pagination: false,
+	navigation : false,
+    autoHeight : false,
+    lazyLoad : true,
+    responsive: true
+ 
+  
+  }); 
+  
  
   jQuery('#fp780').click(function(){
 	  
 	  var widgets = [
-          ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2]
+          ['<li src-strip="780" orig-xy="q" data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2]
       ];
 
       $.each(widgets, function(i, widget){
@@ -52,7 +68,7 @@ function init(){
   jQuery('#fp520').click(function(){
   
       var widgets = [
-          ['<li data-max-sizex="4" data-max-sizey="4"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2]
+          ['<li src-strip="520" orig-xy="q" data-max-sizex="4" data-max-sizey="4"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2]
       ];
 
       jQuery.each(widgets, function(i, widget){
@@ -64,7 +80,7 @@ function init(){
   jQuery('#fp780-portrait').click(function(){
 	  
 	  var widgets = [
-          ['<li data-max-sizex="2" data-max-sizey="6"><div class="control del func-delete-v"><p class="fui-cross"></p></div></li>', 2, 6]
+          ['<li src-strip="780" orig-xy="h" data-max-sizex="2" data-max-sizey="6"><div class="control del func-delete-v"><p class="fui-cross"></p></div></li>', 2, 6]
       ];
 
       $.each(widgets, function(i, widget){
@@ -76,7 +92,7 @@ function init(){
   jQuery('#fp520-portrait').click(function(){
   
       var widgets = [
-          ['<li data-max-sizex="2" data-max-sizey="4"><div class="control del func-delete-v"><p class="fui-cross"></p></div></li>', 2, 4]
+          ['<li src-strip="520" orig-xy="h" data-max-sizex="2" data-max-sizey="4"><div class="control del func-delete-v"><p class="fui-cross"></p></div></li>', 2, 4]
       ];
 
       jQuery.each(widgets, function(i, widget){
@@ -127,66 +143,84 @@ function init(){
   
 
   jQuery('#3dview').click(function(e){
-	  e.preventDefault();
-	
+
+	 e.preventDefault();
+	 	 
 	 jQuery(this).addClass('blink');
+	 
+	  if (jQuery('.gridster ul li').size() == 0){
+		 
+		 showMsgContainer("Kein Formpark Muster gefunden", "Bitte verlegen Sie ein in sich geschlossenes Muster.", false);
+		
+		
+	 } else{
+	
 	 
 	 jQuery("#newFloor").empty();
 	 
-	 drawParquetStrips();
+	 var msg = this;
+	 var retrievedObj = showMsgContainer('Raumansicht', 'Die Raumansicht wird vorbereitet.', true);
 	 
-	 jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
-	 jQuery("#verlegeplan").css('height', jQuery(document).height() + 'px');
+	 jQuery.when(retrievedObj).then(function(){
+
+	   drawParquetStrips();
 	 
-	 jQuery("#newFloor").html(jQuery('#verlegeplan-muster').html());
-	 jQuery(".rechts").css('opacity', '1.0');
+	   jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
+	   jQuery("#verlegeplan").css('height', jQuery(document).height() + 'px');
+	 
+	   jQuery("#newFloor").html(jQuery('#verlegeplan-muster').html());
+	   jQuery(".rechts").css('opacity', '1.0');
  
-	 setParquetStripType(1);
+	   setParquetStripType(1);
 	 
-     animate3DRoom('show');
+       animate3DRoom('show');
+	 });
+	 
+	 }
 	 
 	 jQuery(this).removeClass('blink'); 
-  });  
-  
-  
-  jQuery('#roomSwitch').click(function(){
-  
-    var act = parseInt(jQuery('#raum-moebel').attr("data-src"));
-	var filename = "images/rooms/moebel-1800x1200_";
-	
-	if (act < parseInt(jQuery('#raum-moebel').attr("data-src-max"))){
-		
-		act++;
-		
-		jQuery('#raum-moebel').attr("data-src", act);
-		jQuery('#raum-moebel img').animate({
-          opacity: 0.0
-   
-      }, 1000, function() {
-		 jQuery('#raum-moebel img').attr('src', filename+act+".png");
-         jQuery('#raum-moebel img').css('opacity', '1.0');
 	 
-    
-     });
-		
-	} else{
-	
-	  jQuery('#raum-moebel').attr("data-src", "1");
-	  jQuery('#raum-moebel img').animate({
-          opacity: 0.0
-   
-      }, 1000, function() {
-		 jQuery('#raum-moebel img').attr('src', filename+"1.png");
-         jQuery('#raum-moebel img').css('opacity', '1.0');
-	 
-    
-     });
-		
-	}
-    
+  }); 
+  
+  jQuery('#left-room').click(function(){
+	  
+	  switchRoom(0);
   
   });
   
+  jQuery('#right-room').click(function(){
+	  switchRoom(1);
+	  
+  });
+  
+
+  jQuery('#closeMsg').click(function(){
+	  
+	  closeMsgContainer();
+  
+  });
+  
+  jQuery('#verlegemusterAuswahl').click(function(){
+	  
+	  jQuery("#basis-controls").css('display', 'none');
+	  jQuery("#musterverlegungen-chooser").css('display', 'block');
+	  jQuery("#musterverlegungen-chooser").css('opacity', '1.0');
+	  
+	  
+  });
+  
+  jQuery('.lazyOwl').click(function(e){
+	  
+	 getMusterPreset( parseInt(jQuery(this).attr('data-source')));
+	 
+	//jQuery("#basis-controls").css('display', 'block');
+	//jQuery("#musterverlegungen-chooser").css('display', 'none');
+	//jQuery("#musterverlegungen-chooser").css('opacity', '0.0');
+	
+  
+  });
+  
+ 
   jQuery('#close3dview').click(function(){
   
     animate3DRoom('close');
@@ -227,16 +261,37 @@ function init(){
   jQuery('#datenblatt-calc').click(function(e) {
 	  
      e.preventDefault();
-     
 	 jQuery(this).addClass('blink');
 	 
+	 if (jQuery('.gridster ul li').size() == 0){
+		 
+		 showMsgContainer("Kein Formpark Muster gefunden", "Bitte verlegen Sie ein in sich geschlossenes Muster.");
+		
+		
+	 } else{
+	 
+	 
+	 
+	 var msg = this;
+	 var retrievedObj = showMsgContainer('Datenblatt berechnen', 'Das Verlegedatenblatt wird zusammen gestellt.');
+	 
+	 jQuery.when(retrievedObj).then(function(){
+	
 	 drawParquetStrips();
 	 
-	 jQuery(this).removeClass('blink');
+	 jQuery("#musterverlegungen-chooser").css('display', 'none');
+	 jQuery("#musterverlegungen-chooser").css('opacity', '0.0');
+
+	 
 	 	 
 	 jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
 	 jQuery("#verlegeplan").css('height', jQuery(document).height() + 'px');
      jQuery("#verlegeplan").css('display', 'block');
+	 });
+	 
+	 closeMsgContainer();
+	 }
+	 jQuery(this).removeClass('blink');
 	 
 	 	 
   });
@@ -244,56 +299,14 @@ function init(){
   
   jQuery('#closePlan').click(function() {
      jQuery("#verlegeplan").css('display', 'none');
+	 jQuery("#musterverlegungen-chooser").css('display', 'block');
+	 jQuery("#musterverlegungen-chooser").css('opacity', '1.0');
+
 	 
   });
- 
- 
-  
-  jQuery('#musterPresets').click(function(){
-	  
-	  
-	  var musterID = jQuery("select#musterPresets option").filter(":selected").val() ;
-	  
-	  gridster.remove_all_widgets();
-	  
-	  var widget1 = [
-          ['<li data-max-sizex="4" data-max-sizey="4"><div class="control del func-delete-h"><p class="fui-cross"></p></li>', 2, 4],
-		  ['<li data-max-sizex="4" data-max-sizey="4"><div class="control del func-delete-h"><p class="fui-cross"></p></li>', 2, 4],
-		  ['<li data-max-sizex="4" data-max-sizey="4"><div class="control del func-delete-h"><p class="fui-cross"></p></li>', 2, 4],
-    
-      ];
 
-	  var widget2 = [
-          ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 1, 1],
-		  ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 3, 1],
-		  ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 1],
-          ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 7, 1],
-		  ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 9, 1],
-
-          ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 1, 6, 1, 7],
-		  ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 2, 7],
-		  ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 4, 7],
-          ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 6, 7],
-		  ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 8, 7],
-		  ['<li data-max-sizex="6" data-max-sizey="6"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 1, 6, 10, 7],
-    
-      ];
-	  
-	  switch(musterID){
-		case "1":
-		  jQuery.each(widget1, function(i, widget1){
-            gridster.add_widget.apply(gridster, widget1)
-          });
-		  break;  
-		case "2":
-		  jQuery.each(widget2, function(i, widget2){
-            gridster.add_widget.apply(gridster, widget2)
-          });
-		  break;  
-		  
-	  }
-  	  
-	  
+  jQuery('#close-msg-container').click(function() {
+     jQuery("#msg-container").css('display', 'none');
   });
   
 
@@ -407,6 +420,1497 @@ function updateView() {
    
 	
 
+}
+
+function showMsgContainer(headerValue, bodyValue, showLoader){
+	
+	jQuery("#msg-header").html(headerValue);
+	jQuery("#msg-body").html(bodyValue);
+	
+	if (!showLoader){
+	  jQuery("#msg-loader").css('display', 'none');	
+	} else
+	  jQuery("#msg-loader").css('display', 'block');
+    
+	
+	jQuery("#message-container").css('display', 'block');
+	
+	jQuery("#message-container").css('opacity', '0.8');
+  	  
+	return jQuery("#message-container");
+	
+}
+
+function closeMsgContainer(){
+	jQuery("#message-container").css('display', 'none');
+	 jQuery("#msg-loader").css('display', 'block');
+	jQuery("#message-container").css('opacity', '0.0');
+	
+}
+
+  function getMusterPreset(musterID){
+	   
+	  
+	  gridster.remove_all_widgets();
+	  
+	  switch(musterID){
+		case 1:
+		  openPreset1();
+		  break;  
+		case 2:
+          openPreset2();		  
+		  break;  
+		case 3:
+          openPreset3();		  
+		  break;  
+    	case 4:
+          openPreset4();		  
+		  break;  
+		case 5:
+          openPreset5();		  
+		  break;  
+		case 6:
+          openPreset6();		  
+		  break;  
+		case 7:
+          openPreset7();		  
+		  break;  
+		case 8:
+          openPreset8();		  
+		  break;  
+		case 9:
+          openPreset9();		  
+		  break;  
+		case 10:
+          openPreset10();		  
+		  break;  
+		case 11:
+          openPreset11();		  
+		  break;  
+		case 12:
+          openPreset12();		  
+		  break;  
+		case 13:
+          openPreset13();		  
+		  break;  
+		case 14:
+          openPreset14();		  
+		  break;  
+		case 15:
+          openPreset15();		  
+		  break;  
+		case 16:
+          openPreset16();		  
+		  break;  
+		case 17:
+          openPreset17();		  
+		  break;  
+		case 18:
+          openPreset18();		  
+		  break;  
+		case 19:
+          openPreset19();		  
+		  break;  
+		case 20:
+          openPreset20();		  
+		  break;  
+		case 21:
+          openPreset21();		  
+		  break;  
+		case 22:
+          openPreset22();		  
+		  break;  
+		case 23:
+          openPreset23();		  
+		  break;  
+		case 24:
+          openPreset24();		  
+		  break;  
+		case 25:
+          openPreset25();		  
+		  break;  
+		case 26:
+          openPreset26();		  
+		  break;  
+	  
+	  }
+  	  
+	  
+}
+
+function openPreset1(){
+	
+		  var widget = [
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 1],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 1],
+
+
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset2(){
+	
+  var widget = [
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 1, 1, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 1, 9, 1],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 1, 17, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 1],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 2],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 2],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 2],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 4],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 4],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 4],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 5],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 6],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 6],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 6],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 7],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 8],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 8],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 8],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 9],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 10],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 10],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 10],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 11],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 12],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 12],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 12],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 13],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 14],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 14],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 14],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 15],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 1, 1, 16],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 1, 9, 16],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 1, 17, 16],
+	    
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset3(){
+	
+  
+	  var widget = [
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 1],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 1],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 3],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 3],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 5],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 5],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 7],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 7],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 9],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 9],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 11],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 11],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 13],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 13],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 15],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 15],
+
+      ];
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset4(){
+	
+  
+ var widget = [
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 1],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 1],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 3],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 3],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 5],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 5],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 7],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 7],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 9],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 9],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 11],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 11],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 13],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 13],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 15],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 15],
+
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset5(){
+	
+  
+	  var widget = [
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 1, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 1, 13, 1],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 1, 25, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 1],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 2],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 2],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 2],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 3],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 4],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 4],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 4],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 5],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 6],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 6],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 6],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 7],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 8],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 8],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 8],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 9],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 10],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 10],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 10],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 11],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 12],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 12],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 12],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 13],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 14],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 14],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 25, 14],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 31, 15],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 1, 1, 16],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 1, 13, 16],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 1, 25, 16],
+	    
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset6(){
+	
+  
+		  var widget = [
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 1],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 1, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 4, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 10, 3],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 16, 3],
+    	  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 22, 3],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 5],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 5],
+	
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 1, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 4, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 10, 7],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 16, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 22, 7],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 9],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 9],
+	
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 1, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 4, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 10, 11],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 16, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 22, 11],
+	
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 13],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 13],
+	
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 1, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 4, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 10, 15],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 16, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 22, 15],
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset7(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 1, 2, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 2, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 8, 1],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 12, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 18, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 22, 1],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 3],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 17, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 3, 2, 23, 3],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 5],
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 5, 2, 21, 5],
+
+
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset8(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 1],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 3],
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+
+function openPreset9(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+
+
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset10(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 5],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 5],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 5],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 5],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 5],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 5],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 5],
+
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset11(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 1],
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 1],
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 1],
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 3],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 7],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 5],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 7],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 5],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 5],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 7],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 5],
+	
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 5],
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 7],
+
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset12(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 1],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 1],
+
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 3],
+
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+
+
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 7],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 5],
+
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 7],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 5],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 7],
+
+
+
+
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset13(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 1],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 1],
+		  
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 5],
+
+
+
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset14(){
+	
+  
+		  var widget = [
+		  
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 9, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11,1],
+
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 13, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 17, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 21, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 3],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 7],
+
+
+
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset15(){
+	
+  
+		  var widget = [
+		  
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 3],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 1],
+	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 17, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 5],
+
+
+
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset16(){
+	
+  
+		  var widget = [
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 1],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 3],
+
+          ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 7],
+
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 5],
+
+ 	
+
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset17(){
+	
+  
+		  var widget = [
+          ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 1, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 3, 1],
+  		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 1],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+	
+	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 9],
+  		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 11],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 7, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 9, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 11, 7],
+		  
+ 	
+
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset18(){
+	
+  
+		  var widget = [
+
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 5, 2, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 5, 2, 1, 3],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 6, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 8, 1],
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 10, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 10, 3],
+          ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 16, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 18, 1],
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 5, 2, 20, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 5, 2, 20, 3],
+	 
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 5],
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 7],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 5],
+	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 7],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 5],
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset19(){
+	
+  
+		  var widget = [
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 9, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 17, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 1],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 3],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 5],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 9],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 11],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 11],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 9, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 13],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 17, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 13],
+		  
+		  
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset20(){
+	
+  
+		  var widget = [
+		  
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 7, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 9, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 11, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 13, 9],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 15, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 13],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 19, 15],
+
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 15],
+  
+  	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 1, 9],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 3, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 13],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 7, 15],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 15],
+		   
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 17, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 15], 
+		  
+	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 13, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 17, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 19, 3],
+	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 21, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 23, 7],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 5],
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset21(){
+	
+  
+		  var widget = [
+		  
+
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 15],
+  
+  	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 11],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 11, 15],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 15],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 15],
+
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 5],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 11],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 21, 15],
+	
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 13, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 17, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 15],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 15, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 5],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 7],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 5],
+	
+
+
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset22(){
+	
+  
+		  var widget = [
+		  
+
+  	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 15],
+
+  	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 1, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 9, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 11, 15],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 13, 15],
+	
+ 	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 15],
+		  
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 13],
+
+  	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 9, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 13, 5],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 9],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 17, 9],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 13],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 13],
+
+  	      ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 15],
+		  
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 15, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 21, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 7],
+
+  	      ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 5],
+
+	
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset23(){
+	
+  
+		  var widget = [
+		  
+
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+  	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 7, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 9, 1],
+	
+  	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 17, 1],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 23, 3],
+	
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 3, 3],
+		  
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 11, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 17, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 9],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 9, 5],
+
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 15, 7],
+
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 9],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 21, 9],
+		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 11],
+
+          ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 15],
+
+	      ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 1, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 7, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 13],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 15, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 17, 15],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 19, 15],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 15],
+
+	
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset24(){
+	
+  
+		  var widget = [
+		  
+
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 7, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 11, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 15, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 15],
+		  		  
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 13, 15],
+
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 5, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 9, 15],
+
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 15],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 3, 15],
+
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 9, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 11, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 9],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 13],
+	      ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 15],
+	
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 13, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 17, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 23, 9],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 19, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 5],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 7],
+			  
+		
+	
+      ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset25(){
+	
+  
+		  var widget = [
+		  
+
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 5, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 9, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 11, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 13, 3],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 15, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 17, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 3],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 1, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 15, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 23, 7],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 15],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 13],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 5, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 11, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 15, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 15],
+
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 17, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 13],
+		  
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 17, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 19, 15],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 13],
+
+		  
+	     ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+function openPreset26(){
+	
+  
+		  var widget = [
+		  
+
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 5, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 9, 1],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 11, 1],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 1],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 19, 1],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 1, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 9, 3],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 3],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 21, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 15, 3],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 17, 1],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 19, 3],
+		  
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 5],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 5],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 7],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 7],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 7],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 7],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 23, 7],
+		  
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 11],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 9],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 1, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 13],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 3, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 3, 13],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 5, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 9, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 11, 11],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 13, 11],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 15, 9],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 13, 15],
+
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 17, 11],
+		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 13],
+		  
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 17, 15],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 19, 15],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 21, 13],
+		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 15],
+		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 23, 13],
+	     ];
+	  
+	 jQuery.each(widget, function(i, widget){
+         gridster.add_widget.apply(gridster, widget)
+     });
+
+}
+
+
+
+function switchRoom(direction){
+	
+	//direction 0:left, 1:right
+  
+    var act = parseInt(jQuery('#raum-moebel').attr("data-src"));
+	var filename = "images/rooms/moebel-1200x800-";
+	
+	switch(direction){
+	  case 0: act--; break;
+	  case 1: act++; break;	
+	
+	}
+	
+	if (act <= 0) act = parseInt(jQuery('#raum-moebel').attr("data-src-max"));
+	
+	
+	if (act <= parseInt(jQuery('#raum-moebel').attr("data-src-max"))){
+						
+		jQuery('#raum-moebel').attr("data-src", act);
+		jQuery('#raum-moebel img').animate({
+          opacity: 0.0
+   
+        }, 3000, function() {
+		 jQuery('#raum-moebel img').attr('src', filename+act+".png");
+         jQuery('#raum-moebel img').css('opacity', '1.0');
+	 
+    
+       });
+		
+	} else{
+	
+	  jQuery('#raum-moebel').attr("data-src", "1");
+	  jQuery('#raum-moebel img').animate({
+          opacity: 0.0
+   
+      }, 3000, function() {
+		  
+		 jQuery('#raum-moebel img').attr('src', filename+"1.png");
+	     jQuery('#raum-moebel img').css('opacity', '1.0');
+	 
+    
+     });
+		
+	}
+    
+  
 }
 
 function setParquetStripType(type){
@@ -559,16 +2063,17 @@ function animate3DRoom(type){
 	
 	if (type == "show"){
 		
-	  jQuery('#raum, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').css('display', 'block');	
+	  jQuery('#raum, #raum-switcher, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').css('display', 'block');	
 		
-	  jQuery('#raum, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').animate({
+	  jQuery('#raum, #raum-switcher, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').animate({
         opacity: 1.0,
-      }, 5000, function() {
-        // Animation complete.
+      }, 3000, function() {
+        closeMsgContainer();
       });
 		
 	  jQuery('#topSpacer').addClass('hidden');
 	  jQuery('#topLine').addClass('hidden');
+	  jQuery('#header-endline').addClass('hidden');
 	  jQuery('#konfigurator').addClass('hidden');
 	  jQuery('#konfigurator').addClass('hidden');
 	  jQuery('.wrapper').addClass('hidden');	 
@@ -579,15 +2084,18 @@ function animate3DRoom(type){
 		
 	  	
 		
-	  jQuery('#raum, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').animate({
+	  jQuery('#raum, #raum-switcher, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').animate({
         opacity: 0.0,
       }, 1000, function() {
-        jQuery('#raum, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').css('display', 'none');	
+        jQuery('#raum,#raum-switcher, #raum-schatten, #raum-moebel, #parquet, #controls, #titel-control').css('display', 'none');	
       });
+	  
+	  jQuery('#newFloor').html('');
 
 	
 	  jQuery('#topSpacer').removeClass('hidden');
 	  jQuery('#topLine').removeClass('hidden');
+	  jQuery('#header-endline').removeClass('hidden');
 	  jQuery('#konfigurator').removeClass('hidden');
 	  jQuery('#konfigurator').removeClass('hidden');
 	  jQuery('.wrapper').removeClass('hidden');	 
@@ -601,7 +2109,7 @@ function animate3DRoom(type){
 
 
 function drawParquetStrips(){
-	
+			
 	 jQuery('#verlegeplan-muster').empty();
 	 jQuery('#verlegeplan-facts').empty();
 	 
@@ -611,19 +2119,36 @@ function drawParquetStrips(){
 	 var anzV = 0;
 	 var offsetWidth = 0;
 	 var offsetHeight = 0;
-	 var scaleFactor = 12;
+	 var scaleFactor = 23;
 	 
-	 
+	 	  
 	 jQuery(parquetMuster).each(function( index ) {
        
 	   var col = jQuery( this ).attr('data-col');
 	   var row = jQuery( this ).attr('data-row');
 	   var sizeX = jQuery( this ).attr('data-sizex');
 	   var sizeY = jQuery( this ).attr('data-sizey');
+	   var stripType = jQuery( this ).attr('src-strip');
+	   var origXYType = jQuery( this ).attr('orig-xy');
+	   
 	   var cssLeft = 0;
 	   var cssTop = 0;
 	   var parquetType = "";
 	   
+	   
+	   if (stripType == "780"){
+	     parquetType= "fp-780"; 	   
+	   } else {
+		 parquetType= "fp-520";  
+	   }
+	   
+	   if (origXYType == "q"){
+	     parquetType += " rechts"; 	   
+	   } else{
+		 parquetType += " links";   
+	   }
+	   
+	   /*
 	   if (sizeX > sizeY){
 	     if (sizeX > 4)
 		   parquetType= "fp-780 rechts";
@@ -636,10 +2161,11 @@ function drawParquetStrips(){
 		 else	   
 		   parquetType= "fp-520 links";
 	   }
+	   */
 	   
 	   
 	   // update statistic values
-	   if (sizeX > sizeY) anzH++; else anzV++
+	   if (origXYType == "q") anzH++; else anzV++
 	   anzahl++;
 	   
 	   // calc offset pattern x/y axes
@@ -709,8 +2235,10 @@ function drawParquetStrips(){
 	var allPatternElementsH = jQuery(".pattern").clone();
 	 
 	  //clone pattern X-times of y axes ********************************
+	  
+     var counterH = 1200 / offsetHeight;
 	 $i = 1;
-	 while ( $i< 30 ) {
+	 while ( $i< counterH ) {
 		 
 	   var actualTopHeight = offsetHeight*$i;	 
        
@@ -732,22 +2260,26 @@ function drawParquetStrips(){
      }
 	 
 	 
-	 jQuery('#verlegeplan-facts').append("<p>Ihr Mix:</p>");
 	 
+	 jQuery('#verlegeplan-facts').append("<h3 class='dark float-left' style='margin:0 30px 0 50px;'>Ihr Mix</h3>");
 	 
-     jQuery('#verlegeplan-facts').append("<p>"+ fp780 +" % FORMPARK 780</p>");
-	 jQuery('#verlegeplan-facts').append("<p>"+ fp520 +" % FORMPARK 520</p>");
+	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='position: absolute; height: 90px; border-left: 2px solid #fff; margin:-30px 30px 0 180px;'></div>");
+	 
+	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ parseInt(fp780) +" % FORMPARK 780</p><p class='dark'>"+ parseInt(fp520) +" % FORMPARK 520</p></div>");
+	 
+	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='position: absolute; height: 90px; border-left: 2px solid #fff; margin:-30px 30px 0 420px;'></div>");
+	 
+      
+	 
 	 
 	 if (stripLeft > stripRight){
-	   jQuery('#verlegeplan-facts').append("<p>"+ stripLeft +" % Rechts</p>");
-	   jQuery('#verlegeplan-facts').append("<p>"+ stripRight +" % Links</p>");
-	   
+	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ parseInt(stripLeft) +" % rechte Riemen</p><p class='dark'>"+ parseInt(stripRight) +" % linke Riemen</p></div>"); 	 
+   
 	 }else {
-	   jQuery('#verlegeplan-facts').append("<p>"+ stripRight +" % Rechts</p>");
-	   jQuery('#verlegeplan-facts').append("<p>"+ stripLeft +" % Links</p>");
+	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ parseInt(stripRight) +" % rechte Riemen</p><p class='dark'>"+ parseInt(stripLeft) +" % linke Riemen</p></div>"); 		 
 	 
 	 }
-	
+	  
 }
 
   

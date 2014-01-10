@@ -13,8 +13,7 @@ html {
 body{
 	margin: 0 0 180px 0;
 	overflow:hidden;
-	
-	
+
 }
 .wrapper{
 	position:relative;
@@ -24,8 +23,8 @@ footer {
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 180px;
     width: 100%;
+	height:160px;
 }
 
 /***** Screen 960px *****/
@@ -53,7 +52,7 @@ h4.subtitle										{font-size:24px; line-height:28px; color:#000; margin:0 0 0
 p 										        {font-size:16px; margin:0; padding:0 0 10px 0; line-height:20px; }
 p.made                                          {font-size:12px; text-transform:uppercase;}
 .page-header-row{
-	min-height:100px;
+	min-height:60px;
 }
 
 .parkett-navi-container{
@@ -76,9 +75,6 @@ p.made                                          {font-size:12px; text-transform:
 footer.konfigurator{
 	
 }
-.parquetChooser{
-  width: 160px;
-}
 
 .parquetChooser:hover{
 	cursor:pointer;
@@ -92,20 +88,16 @@ footer.konfigurator{
 	
 }
 
-#raum, #raum-schatten, #raum-moebel, #stage, .container{
+#raum, #raum-schatten, #raum-moebel, #stage, .container, #parquet{
 	width: 1024px;
 	height: 682px;
+    margin: 0px auto;
 }
-#parquet{
-	width: 1200px;
-	height: 800px;	
-	top:30px;
-}
-
 #raum img, #raum-schatten img, #raum-moebel img{
-   height: 682px;
+	height: 682px;
    width: 1024px;
 }
+
 
 .container{
 	position:relative;
@@ -114,10 +106,10 @@ footer.konfigurator{
 	overflow:hidden;
 
     
--webkit-perspective: 800px;
-   -moz-perspective: 800px;
-     -o-perspective: 800px;
-        perspective: 800px;
+-webkit-perspective: 700px;
+   -moz-perspective: 700px;
+     -o-perspective: 700px;
+        perspective: 700px;
 		
 -webkit-perspective-origin: 42% 60%;
    -moz-perspective-origin: 42% 60%;
@@ -140,12 +132,37 @@ footer.konfigurator{
 	left:-150px;
     position: absolute;
 }
+#message-container{
+	position:relative;
+	margin:0 auto;
+	width:350px;
+	min-height:200px;
+	color:#fff;
+	background-color:#9c8c76;
+	opacity:0.0;
+	overflow:hidden;
+	display:none;
+}
+.message-content{
+	padding:20px;
+}
+
+.panel{
+	width: 100%;
+    height: 100%;
+	left:-150px;
+    position: absolute;
+}
 
 #stage{
    position:absolute;
    overflow:hidden;
 }
 #titel-control{
+	position:absolute;
+    top:0px;
+	left:20px;
+	background:transparent;
     opacity:0.0;
 	display:none;
 	
@@ -153,26 +170,52 @@ footer.konfigurator{
 #controls{
 	position:absolute;
 	width:100%;
+	left:0px;
 	bottom:0px;
 	background:#333;
     opacity:0.0;
 	display:none;
 	padding-top:30px;
 }
+#datablatt-drucken{
+	
+}
 
+#musterverlegungen-chooser{
+	background:#333;
+    opacity:1.0;
+	display:block;
+
+}
+.verlegemuster-item{
+	margin: 15px
+}
 #raum{
 	position:absolute;
-	width:100%;
     background: transparent;
 	overflow:hidden;
     opacity:0.0;
 	display:none;
 	left:0px;
 	top:0px;
+}
+#raum img{
+	width:1024px;
+	height:auto;
+}
+#raum-switcher{
+   position:absolute;
+   width:100%;
+   background: transparent;
+   overflow:hidden;
+   opacity:0.0;
+   display:none;
+   left:0px;
+   top:250px;
+   height: 250px;
 }
 #raum-schatten{
 	position:absolute;
-	width:100%;
     background: transparent;
 	overflow:hidden;
     opacity:0.0;
@@ -181,9 +224,12 @@ footer.konfigurator{
 	top:0px;
 
 }
+#raum-schatten img{
+	width:1024px;
+	height:auto;
+}
 #raum-moebel{
 	position:absolute;
-	width:100%;
     background: transparent;
 	overflow:hidden;
     opacity:0.0;
@@ -191,12 +237,15 @@ footer.konfigurator{
 	left:0px;
 	top:0px;
 
+}
+#raum-moebel img{
+	width:1024px;
+	height:auto;
 }
 #parquet{
 	position:absolute;
 	margin:0;
 	padding:0;
-    width:100%;
 	background:transparent;
     opacity:0.0;
 	display:none;
@@ -260,6 +309,16 @@ footer.konfigurator{
   background-color: #cec6bb;
 	
 }
+
+#musterverlegungen-chooser{
+	background:#333;
+    opacity:1.0;
+	display:block;
+
+}
+.verlegemuster-item{
+	margin: 15px
+}
 #verlegeplan{position: absolute; display:none; background-color:#fff; top:0px; left:0px; z-index:500;}
 #verlegeplan-muster{min-height:850px;}
 
@@ -270,8 +329,11 @@ footer.konfigurator{
 
  #konfigurator{display:none;}
  #wrapper{display:none;}
+ #datablatt-drucken{display:none;}
  footer{display:none;}
  .row {margin-left: 20px;}
+ .pattern{border:1px solid #333;}
+ .closePlan{display:none;}
 
 
 
@@ -291,8 +353,6 @@ footer {
     height: 180px;
     width: 100%;
 }
-
-/***** Screen 960px *****/
 
 .logo{
 	width:180px;
@@ -344,6 +404,20 @@ footer.konfigurator{
 .parquetChooser:hover{
 	cursor:pointer;
 }
+#message-container{
+	position:relative;
+	margin:0 auto;
+	width:350px;
+	min-height:250px;
+	color:#fff;
+	background-color:#9c8c76;
+	opacity:0.0;
+	overflow:hidden;
+	display:none;
+}
+.message-content{
+	padding:20px;
+}
 #roomSwitch:hover{
 	cursor:pointer;
 	
@@ -352,7 +426,7 @@ footer.konfigurator{
 #raum, #raum-schatten, #raum-moebel, #stage, .container, #parquet{
 	width: 1200px;
 	height: 800px;
-   
+    margin: 0px auto;
 }
 #raum img, #raum-schatten img, #raum-moebel img{
 	height: 800px;
@@ -400,6 +474,7 @@ footer.konfigurator{
 #titel-control{
 	position:absolute;
     top:0px;
+	left:200px;
 	background:transparent;
     opacity:0.0;
 	display:none;
@@ -407,12 +482,26 @@ footer.konfigurator{
 }
 #controls{
 	position:absolute;
-	width:100%;
-	bottom:0px;
+	width:1200px;
+	left:200px;
+	top:820px;
 	background:#333;
     opacity:0.0;
 	display:none;
 	padding-top:30px;
+}
+#datablatt-drucken{
+	
+}
+
+#musterverlegungen-chooser{
+	background:#333;
+    opacity:1.0;
+	display:block;
+
+}
+.verlegemuster-item{
+	margin: 15px
 }
 #raum{
 	position:absolute;
@@ -420,8 +509,19 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:0px;
-	top:0px;
+	left:200px;
+	top:120px;
+}
+#raum-switcher{
+   position:absolute;
+   width:1200px;
+   background: transparent;
+   overflow:hidden;
+   opacity:0.0;
+   display:none;
+   left:200px;
+   top:450px;
+   height: 250px;
 }
 #raum-schatten{
 	position:absolute;
@@ -429,8 +529,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:0px;
-	top:0px;
+	left:200px;
+	top:120px;
 
 }
 #raum-moebel{
@@ -439,8 +539,8 @@ footer.konfigurator{
 	overflow:hidden;
     opacity:0.0;
 	display:none;
-	left:0px;
-	top:0px;
+	left:200px;
+	top:120px;
 
 }
 #parquet{
@@ -450,8 +550,8 @@ footer.konfigurator{
 	background:transparent;
     opacity:0.0;
 	display:none;
-	left:0px;
-	top:0px;
+	left:200px;
+	top:120px;
  
 }
 
@@ -502,6 +602,16 @@ footer.konfigurator{
 #verlegeplan{position: absolute; display:none; background-color:#fff; top:0px; left:0px; z-index:500;}
 #verlegeplan-muster{min-height:850px;}
 
+.rechts{
+  background-color: #cec6bb;
+  opacity:0.8;
+	
+}
+
+.links{
+  background-color: #cec6bb;
+	
+}
 
 }
 
