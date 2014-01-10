@@ -211,6 +211,7 @@ function init(){
   
   jQuery('.lazyOwl').click(function(e){
 	  
+	 closeMsgContainer();
 	 getMusterPreset( parseInt(jQuery(this).attr('data-source')));
 	 
 	//jQuery("#basis-controls").css('display', 'block');
