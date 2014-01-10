@@ -17,7 +17,7 @@ jQuery(document).ready(function(){
 
 jQuery(window).load(function(){
 	
-	showMsgContainer('Herzlich willkommen im Formpark-Konfigurator', '<li>1. Gewünschte Verlegung wählen</li><li>2. Musterverlegung in den Raum legen</li><li>3. Farbe und Sortierung wählen</li><li>4. Raumsituation wählen</li>', false);
+	showMsgContainer('Herzlich willkommen im Formpark-Konfigurator', '<ol>1. Gewünschte Verlegung wählen</ol><ol>2. Musterverlegung in den Raum legen</ol><ol>3. Farbe und Sortierung wählen</ol><ol>4. Raumsituation wählen</ol>', false);
 	
   
 			
@@ -163,7 +163,7 @@ function init(){
 	 
 	 jQuery.when(retrievedObj).then(function(){
 
-	   drawParquetStrips();
+	   drawParquetStrips(false);
 	 
 	   jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
 	   jQuery("#verlegeplan").css('height', jQuery(document).height() + 'px');
@@ -277,7 +277,7 @@ function init(){
 	 
 	 jQuery.when(retrievedObj).then(function(){
 	
-	 drawParquetStrips();
+	 drawParquetStrips(true);
 	 
 	 jQuery("#musterverlegungen-chooser").css('display', 'none');
 	 jQuery("#musterverlegungen-chooser").css('opacity', '0.0');
@@ -2108,7 +2108,7 @@ function animate3DRoom(type){
 
 
 
-function drawParquetStrips(){
+function drawParquetStrips(only1Time){
 			
 	 jQuery('#verlegeplan-muster').empty();
 	 jQuery('#verlegeplan-facts').empty();
@@ -2209,6 +2209,8 @@ function drawParquetStrips(){
 	 var counterW = 1200 / offsetWidth;
 	 	 
 	 $i = 1;
+	 
+	 if (only1Time) $i = counterW;
 	 while ( $i< counterW ) {
 		 
 	   var actualLeftWidth = offsetWidth * $i;	 
@@ -2238,6 +2240,8 @@ function drawParquetStrips(){
 	  
      var counterH = 1200 / offsetHeight;
 	 $i = 1;
+	 
+	 if (only1Time) $i = counterH;
 	 while ( $i< counterH ) {
 		 
 	   var actualTopHeight = offsetHeight*$i;	 
@@ -2265,7 +2269,7 @@ function drawParquetStrips(){
 	 
 	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='position: absolute; height: 90px; border-left: 2px solid #fff; margin:-30px 30px 0 180px;'></div>");
 	 
-	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ parseInt(fp780) +" % FORMPARK 780</p><p class='dark'>"+ parseInt(fp520) +" % FORMPARK 520</p></div>");
+	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ Math.round(fp780) +" % FORMPARK 780</p><p class='dark'>"+ Math.round(fp520) +" % FORMPARK 520</p></div>");
 	 
 	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='position: absolute; height: 90px; border-left: 2px solid #fff; margin:-30px 30px 0 420px;'></div>");
 	 
@@ -2273,14 +2277,11 @@ function drawParquetStrips(){
 	 
 	 
 	 if (stripLeft > stripRight){
-	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ parseInt(stripLeft) +" % rechte Riemen</p><p class='dark'>"+ parseInt(stripRight) +" % linke Riemen</p></div>"); 	 
+	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ Math.round(stripLeft) +" % rechte Riemen</p><p class='dark'>"+ Math.round(stripRight) +" % linke Riemen</p></div>"); 	 
    
 	 }else {
-	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ parseInt(stripRight) +" % rechte Riemen</p><p class='dark'>"+ parseInt(stripLeft) +" % linke Riemen</p></div>"); 		 
+	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ Math.round(stripRight) +" % rechte Riemen</p><p class='dark'>"+ Math.round(stripLeft) +" % linke Riemen</p></div>"); 		 
 	 
 	 }
 	  
 }
-
-  
-

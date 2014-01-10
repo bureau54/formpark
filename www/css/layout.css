@@ -320,7 +320,7 @@ footer.konfigurator{
 	margin: 15px
 }
 #verlegeplan{position: absolute; display:none; background-color:#fff; top:0px; left:0px; z-index:500;}
-#verlegeplan-muster{min-height:850px;}
+#verlegeplan-muster{min-height:450px;}
 
 
 @media print { 
