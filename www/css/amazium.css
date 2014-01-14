@@ -242,7 +242,7 @@
 .grid_9,
 .grid_10,
 .grid_11,
-.grid_12							{ width:456px; margin:0px 0 0 10px; overflow:hidden; float:left; display:inline; }
+.grid_12							{ width:456px; margin:0px 50px 0px 10px; overflow:hidden; float:left; display:inline; }
 
 .show-phone 						{ display:inherit !important; }
 .show-tablet 						{ display:none !important; }

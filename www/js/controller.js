@@ -2237,7 +2237,10 @@ function drawParquetStrips(only1Time){
 	 //clone pattern X-times of x axes ********************************
 	 var allPatternElements = jQuery(".pattern").clone();
 	 
-	 var counterW = jQuery(window).width() / offsetWidth;
+	 var actWidthOfDevice = jQuery(window).width();
+	 
+	 if (actWidthOfDevice < 500) actWidthOfDevice = 520;
+	 var counterW = actWidthOfDevice / offsetWidth;
 	 	 
 	 $i = 1;
 	 

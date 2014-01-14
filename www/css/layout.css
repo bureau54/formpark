@@ -321,6 +321,7 @@ img.lazyOwl{
 	background:#333;
     opacity:1.0;
 	display:block;
+	min-height:180px;
 
 }
 .verlegemuster-item{
