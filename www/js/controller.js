@@ -2145,12 +2145,16 @@ function drawParquetStrips(only1Time){
 	 jQuery('#verlegeplan-facts').empty();
 	 
 	 var parquetMuster = jQuery('.gridster ul li');
+	 var actWidthOfDevice = jQuery(window).width();
+	 
 	 var anzahl = 0;
 	 var anzH = 0;
 	 var anzV = 0;
 	 var offsetWidth = 0;
 	 var offsetHeight = 0;
 	 var scaleFactor = 23;
+	 
+	 if (actWidthOfDevice < 500) scaleFactor = 12;
 	 
 	 	  
 	 jQuery(parquetMuster).each(function( index ) {
