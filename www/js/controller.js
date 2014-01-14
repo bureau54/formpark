@@ -236,31 +236,55 @@ function init(){
   
   jQuery('#eiche-14-strips').click(function(){
   
-    setParquetStripType(1);
+    showMsgContainer("Eiche 14", "Ihre Boden wird neu verlegt.", true);
+	setTimeout(function () {
+       setParquetStripType(1);
+	   closeMsgContainer();
+    }, 1500);
+	
   
   });
 
   jQuery('#eiche-35-strips').click(function(){
   
-    setParquetStripType(2);
+    showMsgContainer("Eiche 35", "Ihre Boden wird neu verlegt.", true);
+	setTimeout(function () {
+       setParquetStripType(2);
+	   closeMsgContainer();
+    }, 1500);
   
   });
 
   jQuery('#eiche-14-ger-strips').click(function(){
   
-    setParquetStripType(3);
+       showMsgContainer("Eiche 14 geräuchert", "Ihre Boden wird neu verlegt.", true);
+	setTimeout(function () {
+       setParquetStripType(3);
+	   closeMsgContainer();
+    }, 1500);
+
   
   });
 
   jQuery('#eiche-24-ger-strips').click(function(){
   
-    setParquetStripType(4);
+        showMsgContainer("Eiche 24 geräuchert", "Ihre Boden wird neu verlegt.", true);
+	setTimeout(function () {
+       setParquetStripType(4);
+	   closeMsgContainer();
+    }, 1500);
+
   
   });
 
   jQuery('#eiche-14-avorio-strips').click(function(){
   
-    setParquetStripType(5);
+        showMsgContainer("Eiche Avorio 14", "Ihre Boden wird neu verlegt.", true);
+	setTimeout(function () {
+       setParquetStripType(5);
+	   closeMsgContainer();
+    }, 1500);
+
   
   });
  
@@ -2213,7 +2237,7 @@ function drawParquetStrips(only1Time){
 	 //clone pattern X-times of x axes ********************************
 	 var allPatternElements = jQuery(".pattern").clone();
 	 
-	 var counterW = 1200 / offsetWidth;
+	 var counterW = jQuery(window).width() / offsetWidth;
 	 	 
 	 $i = 1;
 	 
@@ -2245,7 +2269,7 @@ function drawParquetStrips(only1Time){
 	 
 	  //clone pattern X-times of y axes ********************************
 	  
-     var counterH = 1200 / offsetHeight;
+     var counterH = jQuery(window).height() / offsetHeight;
 	 $i = 1;
 	 
 	 if (only1Time) $i = counterH;

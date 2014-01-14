@@ -174,7 +174,7 @@ footer.konfigurator{
 	position:absolute;
 	width:100%;
 	left:0px;
-	bottom:0px;
+	bottom:0;
 	background:#333;
     opacity:0.0;
 	display:none;
@@ -801,6 +801,7 @@ img.lazyOwl{
     opacity:0.0;
 	display:none;
 	padding-top:30px;
+	bottom:0;
 }	
 
 
