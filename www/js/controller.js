@@ -236,7 +236,7 @@ function init(){
   
   jQuery('#eiche-14-strips').click(function(){
   
-    showMsgContainer("Eiche 14", "Ihre Boden wird neu verlegt.", true);
+    showMsgContainer("Eiche 14", "Ihr Boden wird neu verlegt.", true);
 	setTimeout(function () {
        setParquetStripType(1);
 	   closeMsgContainer();
@@ -247,7 +247,7 @@ function init(){
 
   jQuery('#eiche-35-strips').click(function(){
   
-    showMsgContainer("Eiche 35", "Ihre Boden wird neu verlegt.", true);
+    showMsgContainer("Eiche 35", "Ihr Boden wird neu verlegt.", true);
 	setTimeout(function () {
        setParquetStripType(2);
 	   closeMsgContainer();
@@ -257,7 +257,7 @@ function init(){
 
   jQuery('#eiche-14-ger-strips').click(function(){
   
-       showMsgContainer("Eiche 14 geräuchert", "Ihre Boden wird neu verlegt.", true);
+       showMsgContainer("Eiche 14 geräuchert", "Ihr Boden wird neu verlegt.", true);
 	setTimeout(function () {
        setParquetStripType(3);
 	   closeMsgContainer();
@@ -268,7 +268,7 @@ function init(){
 
   jQuery('#eiche-24-ger-strips').click(function(){
   
-        showMsgContainer("Eiche 24 geräuchert", "Ihre Boden wird neu verlegt.", true);
+        showMsgContainer("Eiche 24 geräuchert", "Ihr Boden wird neu verlegt.", true);
 	setTimeout(function () {
        setParquetStripType(4);
 	   closeMsgContainer();
@@ -279,7 +279,7 @@ function init(){
 
   jQuery('#eiche-14-avorio-strips').click(function(){
   
-        showMsgContainer("Eiche Avorio 14", "Ihre Boden wird neu verlegt.", true);
+        showMsgContainer("Eiche Avorio 14", "Ihr Boden wird neu verlegt.", true);
 	setTimeout(function () {
        setParquetStripType(5);
 	   closeMsgContainer();
