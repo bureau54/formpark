@@ -30,10 +30,13 @@ function init(){
   gridster = jQuery(".gridster > ul").gridster({
     widget_margins: [1, 1],
     widget_base_dimensions: [15, 15],
+	autogenerate_stylesheet: false,
 	avoid_overlapped_widgets:true,
 
 
   }).data('gridster');
+  
+  gridster.generate_stylesheet();
   
   
   jQuery("#owl-formpark").owlCarousel({
@@ -213,12 +216,14 @@ function init(){
 	  
 	 var id = parseInt(jQuery(this).attr('data-source'));
 	 closeMsgContainer();
+	 gridster.remove_all_widgets();
 	 showMsgContainer("Wunsch-Verlegung", "Ihre Musterauswahl wird aufbereitet.", true);
-	 setTimeout(function () {
-                    getMusterPreset(id);
-					closeMsgContainer();
-                 }, 1500);
 	 
+	 setTimeout(function () {
+	   getMusterPreset(id);
+       closeMsgContainer();
+                    
+                 }, 500);
 	 
 	//jQuery("#basis-controls").css('display', 'block');
 	//jQuery("#musterverlegungen-chooser").css('display', 'none');
@@ -481,9 +486,7 @@ function closeMsgContainer(){
 
   function getMusterPreset(musterID){
 	   
-	  
-	  gridster.remove_all_widgets();
-	  
+	  	  
 	  switch(musterID){
 		case 1:
 		  openPreset1();
