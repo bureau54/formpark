@@ -2246,7 +2246,7 @@ function drawParquetStrips(only1Time){
 	 
 	 var actWidthOfDevice = jQuery(window).width();
 	 
-	 if (actWidthOfDevice < 500) actWidthOfDevice = 520;
+	 if (actWidthOfDevice < 700) actWidthOfDevice = 800;
 	 var counterW = actWidthOfDevice / offsetWidth;
 	 	 
 	 $i = 1;
@@ -2279,7 +2279,12 @@ function drawParquetStrips(only1Time){
 	 
 	  //clone pattern X-times of y axes ********************************
 	  
-     var counterH = jQuery(window).height() / offsetHeight;
+	var actHeightOfDevice = jQuery(window).height();
+	 
+	 if (actHeightOfDevice < 350) actHeightOfDevice = 600;
+	 var counterH = actHeightOfDevice / offsetHeight;
+
+
 	 $i = 1;
 	 
 	 if (only1Time) $i = counterH;

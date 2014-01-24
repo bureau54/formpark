@@ -105,7 +105,7 @@ ul.square li,
 ul.circle li,
 ul.disc li								{ margin:0 0 5px 15px; padding:0; line-height:18px; background:none; }
 
-ol 										{ margin:0 0 20px 20px; list-style:decimal; }
+ol 										{ margin:0 0 5px 20px; list-style:decimal; }
 ol li									{ margin:0 0 5px 0; padding:0; line-height:18px; }
 
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
