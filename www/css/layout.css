@@ -147,7 +147,7 @@ footer.konfigurator{
 	display:none;
 }
 .message-content{
-	padding:20px;
+	padding:10px 10px 0px 10px;
 }
 
 .panel{
@@ -648,7 +648,7 @@ p.made                                          {font-size:10px; text-transform:
 }
 
 .gridster{
-	min-height:60px;
+min-height:0px;	
 }
 	
 .verlegemuster-item{
@@ -728,7 +728,7 @@ img.lazyOwl{
    opacity:0.0;
    display:none;
    left:0px;
-   top:150px;
+   top:100px;
    height: 150px;
 }
 #raum-schatten{
@@ -801,7 +801,7 @@ p.made                                          {font-size:10px; text-transform:
 }
 
 .gridster{
-	min-height:60px;
+min-height:0px;
 }
 	
 .verlegemuster-item{
@@ -881,7 +881,7 @@ img.lazyOwl{
    opacity:0.0;
    display:none;
    left:0px;
-   top:150px;
+   top:100px;
    height: 150px;
 }
 #raum-schatten{
@@ -954,7 +954,7 @@ p.made                                          {font-size:10px; text-transform:
 }
 
 .gridster{
-	min-height:60px;
+	min-height:0px;
 }
 	
 .verlegemuster-item{
@@ -1034,7 +1034,7 @@ img.lazyOwl{
    opacity:0.0;
    display:none;
    left:0px;
-   top:150px;
+   top:100px;
    height: 150px;
 }
 #raum-schatten{
@@ -1064,7 +1064,7 @@ img.lazyOwl{
 	background:transparent;
     opacity:0.0;
 	display:none;
-	left:0px;
+	left:-20px;
 	top:0px;
  
 }

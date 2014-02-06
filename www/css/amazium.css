@@ -254,6 +254,36 @@
 
 }
 
+/***** Phone5 (landscape 568px) *****/
+@media only screen and (min-width: 560px) and (max-width: 767px) {
+    
+    .row-full                           { margin:0; width:100%; overflow:hidden; }
+    .row, profile, form.confirmation	{ margin:0; width:100%; overflow:hidden; }
+    .row .row 							{ margin:0; width:auto; display:inline-block; }
+    
+    .grid_1,
+    .grid_2,
+    .grid_3,
+    .grid_4,
+    .grid_5,
+    .grid_6,
+    .grid_7,
+    .grid_8,
+    .grid_9,
+    .grid_10,
+    .grid_11,
+    .grid_12							{ width:550px; margin:0px 50px 0px 10px; overflow:hidden; float:left; display:inline; }
+    
+    .show-phone 						{ display:inherit !important; }
+    .show-tablet 						{ display:none !important; }
+    .show-screen						{ display:none !important; }
+	
+    .hide-phone							{ display:none !important; }
+    .hide-tablet						{ display:inherit !important; }
+    .hide-screen						{ display:inherit !important; }
+    
+}
+
 
 
 

@@ -17,7 +17,7 @@ jQuery(document).ready(function(){
 
 jQuery(window).load(function(){
 	
-	showMsgContainer('Herzlich willkommen im Formpark-Konfigurator', '<ol>1. Gewünschte Verlegung wählen</ol><ol>2. Musterverlegung in den Raum legen</ol><ol>3. Farbe und Sortierung wählen</ol><ol>4. Raumsituation wählen</ol>', false);
+	showMsgContainer("<h3 class='dark'>Herzlich willkommen im <br> Formpark-Konfigurator</h3>", "<ol>1. Gewünschte Verlegung wählen</ol><ol>2. Musterverlegung in den Raum legen</ol><ol>3. Farbe und Sortierung wählen</ol><ol>4. Raumsituation wählen</ol>", false);
 	
   
 			
