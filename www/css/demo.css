@@ -39,6 +39,8 @@ ul {
     -o-transition: opacity .6s;
     -ms-transition: opacity .6s;
     transition: opacity .6s;
+	
+	display:none;
 }
 
 .gridster-overlay{

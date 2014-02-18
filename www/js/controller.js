@@ -299,6 +299,8 @@ function init(){
      e.preventDefault();
 	 jQuery(this).addClass('blink');
 	 
+	 var preset = jQuery("#muster-container img").attr('data-id');
+	 
 	 if (jQuery('.gridster ul li').size() == 0){
 		 
 		 showMsgContainer("Kein Formpark Muster gefunden", "Bitte verlegen Sie ein in sich geschlossenes Muster.");
@@ -306,24 +308,17 @@ function init(){
 		
 	 } else{
 	 
-	 
-	 
-	 var msg = this;
-	 var retrievedObj = showMsgContainer('Datenblatt berechnen', 'Das Verlegedatenblatt wird zusammen gestellt.');
-	 
-	 jQuery.when(retrievedObj).then(function(){
-	
-	 drawParquetStrips(true);
+	 jQuery("#verlegeplan-muster").html("<img data-id='"+preset+"' src='images/pdf/Verlegeraster_Muster_"+preset+".png' class='pdf-pattern' alt='Muster "+preset+"'/>");
+	 jQuery("#verlegeplan-facts").html("<a href='images/pdf/Verlegeraster_Muster_"+preset+".pdf' target='_blank'><p style='margin-right:20px;' class='btn float-left'>Download Verlegeplan PDF</p></a><a href='images/pdf/Verlegeraster_eigenes_Muster.pdf' target='_blank'><p class='btn float-left'>Download Verlegeraster PDF</p></a>");
 	 
 	 jQuery("#musterverlegungen-chooser").css('display', 'none');
 	 jQuery("#musterverlegungen-chooser").css('opacity', '0.0');
-
-	 
+	 jQuery("footer").css('display', 'none');
 	 	 
 	 jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
 	 jQuery("#verlegeplan").css('height', jQuery(document).height() + 'px');
      jQuery("#verlegeplan").css('display', 'block');
-	 });
+	 
 	 
 	 closeMsgContainer();
 	 }
@@ -337,6 +332,7 @@ function init(){
      jQuery("#verlegeplan").css('display', 'none');
 	 jQuery("#musterverlegungen-chooser").css('display', 'block');
 	 jQuery("#musterverlegungen-chooser").css('opacity', '1.0');
+	 jQuery("footer").css('display', 'block');
 
 	 
   });
@@ -471,7 +467,7 @@ function showMsgContainer(headerValue, bodyValue, showLoader){
 	
 	jQuery("#message-container").css('display', 'block');
 	
-	jQuery("#message-container").css('opacity', '0.8');
+	jQuery("#message-container").css('opacity', '0.9');
   	  
 	return jQuery("#message-container");
 	
@@ -568,6 +564,8 @@ function closeMsgContainer(){
 		  break;  
 	  
 	  }
+	  
+	  jQuery("#muster-container").html("<img data-id='"+musterID+"' src='images/verlegemuster/"+musterID+"-gross.png' class='img-pattern' alt='Muster "+musterID+"'/>")
   	  
 	  
 }
@@ -588,7 +586,7 @@ function openPreset1(){
 	 jQuery.each(widget, function(i, widget){
          gridster.add_widget.apply(gridster, widget)
      });
-
+	 
 }
 
 function openPreset2(){
@@ -1961,7 +1959,7 @@ function setParquetStripType(type){
 
 function getRandomParquetClass(type, obj){
 		   
-  $style = Math.round(Math.random() * 6) + 1
+  $style = Math.round(Math.random() * 9) + 1
   $newParquetPiece = "";
   
   $is520 = jQuery(obj).hasClass('fp-520');
@@ -2308,26 +2306,5 @@ function drawParquetStrips(only1Time){
        });
        $i++; 
      }
-	 
-	 
-	 
-	 jQuery('#verlegeplan-facts').append("<h3 class='dark float-left' style='margin:0 30px 0 50px;'>Ihr Mix</h3>");
-	 
-	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='position: absolute; height: 90px; border-left: 2px solid #fff; margin:-30px 30px 0 180px;'></div>");
-	 
-	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ Math.round(fp780) +" % FORMPARK 780</p><p class='dark'>"+ Math.round(fp520) +" % FORMPARK 520</p></div>");
-	 
-	 jQuery('#verlegeplan-facts').append("<div class='float-left' style='position: absolute; height: 90px; border-left: 2px solid #fff; margin:-30px 30px 0 420px;'></div>");
-	 
-      
-	 
-	 
-	 if (stripLeft > stripRight){
-	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ Math.round(stripLeft) +" % rechte Riemen</p><p class='dark'>"+ Math.round(stripRight) +" % linke Riemen</p></div>"); 	 
-   
-	 }else {
-	   jQuery('#verlegeplan-facts').append("<div class='float-left' style='margin:0 30px 0 50px'><p class='dark'>"+ Math.round(stripRight) +" % rechte Riemen</p><p class='dark'>"+ Math.round(stripLeft) +" % linke Riemen</p></div>"); 		 
-	 
-	 }
 	  
 }
