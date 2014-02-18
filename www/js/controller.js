@@ -313,7 +313,7 @@ function init(){
 	 
 	 jQuery("#musterverlegungen-chooser").css('display', 'none');
 	 jQuery("#musterverlegungen-chooser").css('opacity', '0.0');
-	 jQuery("footer").css('display', 'none');
+	 jQuery('footer').addClass('hidden');
 	 	 
 	 jQuery("#verlegeplan").css('width', jQuery(window).width() + 'px');
 	 jQuery("#verlegeplan").css('height', jQuery(document).height() + 'px');
@@ -323,6 +323,7 @@ function init(){
 	 closeMsgContainer();
 	 }
 	 jQuery(this).removeClass('blink');
+	
 	 
 	 	 
   });
@@ -332,7 +333,7 @@ function init(){
      jQuery("#verlegeplan").css('display', 'none');
 	 jQuery("#musterverlegungen-chooser").css('display', 'block');
 	 jQuery("#musterverlegungen-chooser").css('opacity', '1.0');
-	 jQuery("footer").css('display', 'block');
+	 jQuery('footer').removeClass('hidden');
 
 	 
   });
