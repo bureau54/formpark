@@ -38,6 +38,15 @@
     	
 	<script src="js/controller.js" type="text/javascript"></script>
     
+    <script type="text/javascript">
+    function checkLanguage() {
+      navigator.globalization.getPreferredLanguage(
+        function (language) {alert('language: ' + language.value + '\n');},
+        function () {alert('Error getting language\n');}
+      );
+    }
+	</script>
+    
 	
 </head>
 <body>
