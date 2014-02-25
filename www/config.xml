@@ -64,7 +64,5 @@
     -->
     <access origin="*"/> <!-- allow local pages -->
 	
-	<gap:plugin name="org.apache.cordova.globalization" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-
 </widget>
