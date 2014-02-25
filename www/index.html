@@ -37,16 +37,9 @@
     <script src="js/owl.carousel.min.js" type="text/javascript"></script>
     	
 	<script src="js/controller.js" type="text/javascript"></script>
-    
-    <script type="text/javascript">
-    function checkLanguage() {
-      navigator.globalization.getPreferredLanguage(
-        function (language) {alert('language: ' + language.value + '\n');},
-        function () {alert('Error getting language\n');}
-      );
-    }
-	</script>
-    
+
+    <script src="cordova.js" type="text/javascript"></script>
+
 	
 </head>
 <body>
@@ -64,10 +57,10 @@
   <div class="row">
     <div class="grid_12 page-header-row">
     
-      <h2>Der Konfigurator</h2><h4 class="subtitle">Meine Wunsch-Verlegung</h4>
+      <h2 data-translate="1">Der Konfigurator</h2><h4 class="subtitle" data-translate="2">Meine Wunsch-Verlegung</h4>
       
       <a href="#"><h3 id="3dview" class="fui-arrow-right float-right" style="margin-top:12px;"></h3></a>
-      <p class="float-right" style="margin-top:22px;">In den Raum legen</p>
+      <p class="float-right" style="margin-top:22px;" data-translate="3">In den Raum legen</p>
     
     </div>
   </div>
@@ -123,7 +116,7 @@
 <div id="raum-schatten">
   <img src="images/rooms/schatten-1200x800.png"/>
 </div>
-<div id="raum-moebel" data-src="1" data-src-max="3">
+<div id="raum-moebel" data-src="1" data-src-max="5">
   <img src="images/rooms/moebel-1200x800-1.png"/>
 </div>
 
@@ -131,17 +124,17 @@
 
     <div id="eiche-14-strips" class="parquetChooser float-left">
       <img class="float-left" style="margin-right:10px;" src="images/Eiche_14/muster-eiche-14.jpg" width="80" height="80" alt="Eiche 14"/>
-      <p class="float-left dark">Eiche 14</p>
+      <p class="float-left dark" data-translate="19">Eiche 14</p>
     </div>
     
     <div id="eiche-35-strips" class="parquetChooser float-left" style="margin:0 10px 20px 0;">
       <img class="float-left" style="margin-right:10px;" src="images/Eiche_35/muster-eiche-35.jpg" width="80" height="80" alt="Eiche 35"/>
-      <p class="float-left dark">Eiche 35</p>
+      <p class="float-left dark" data-translate="20">Eiche 35</p>
     </div>
 
     <div id="eiche-14-ger-strips" class="parquetChooser float-left" style="margin:0 10px 20px 0;">
       <img class="float-left" style="margin-right:10px;" src="images/Eiche_ger_14/muster-eiche-14-ger.jpg" width="80" height="80" alt="Eiche geräuchert 14"/>
-      <p class="float-left dark">Eiche <br> geräuchert 14</p>
+      <p class="float-left dark" data-translate="21">Eiche <br> geräuchert 14</p>
     </div>
 
    <!-- <div id="eiche-24-ger-strips" class="parquetChooser float-left" style="margin:0 20px 20px 0;">
@@ -151,7 +144,7 @@
    -->
     <div id="eiche-14-avorio-strips" class="parquetChooser float-left" style="margin:0 20px 20px 0;">
       <img class="float-left" style="margin-right:10px;" src="images/Eiche_Avorio_14/muster-avorio-14.jpg" width="80" height="80" alt="Eiche Avorio"/>
-      <p class="float-left dark">Eiche <br> Avorio 14</p>
+      <p class="float-left dark" data-translate="22">Eiche <br> Avorio 14</p>
     </div>
     
     <div class="parquetChooser float-left" style="margin:0 20px 20px 20px;"><a href="#"><h3 id="close3dview" class="fui-cross float-right" style="font-size: 28px; color:#fff;"></h3></a></div>
@@ -165,13 +158,13 @@
 <div id="verlegeplan">
   <div id="topSpacer" class="spacer"></div>
   <div id="topLine" class="row ">
-    <div class="grid_12"><hr/></div>
+    <div class="grid_12"></div>
   </div>
   
   <div class="row">
     <div class="grid_12 page-header-row">
     
-      <h2>Das Verlegedatenblatt</h2>
+      <h2 data-translate="23">Das Verlegedatenblatt</h2>
       <a href="#"><h3 id="closePlan" class="fui-cross float-right" style="font-color:#000; padding-top:20px;"></h3></a>
     </div>
   </div>
@@ -181,7 +174,7 @@
   </div>
 
   <div class="row-full" style="min-height:160px; bottom:0;">
-    <div id="verlegeplan-facts" style="margin:20px; margin-left:40px;" class="grid_12"></div>
+    <div id="verlegeplan-facts" style="margin:20px; margin-left:20px;" class="grid_12"></div>
   </div>
   
 
@@ -248,12 +241,12 @@
 </div>
 
 <div id="datablatt-drucken" class="row">
-  <p id="datenblatt-calc" class="btn btn-dark float-right">Verlege-Datenblatt drucken</p>
+  <p id="datenblatt-calc" class="btn btn-dark float-right" data-translate="9">Verlege-Datenblatt drucken</p>
 </div>
 
 <div id="musterverlegungen-chooser" class="row-full">
 
-   <div class="float-left"><h3 class="fui-arrow-left dark owl-prev" style="margin-top:50px;"></h3></div>
+   <div class="float-left"><h3 class="fui-arrow-left dark owl-prev" style="margin-top:30px;"></h3></div>
   
     
     <div id="owl-formpark" class="owl-carousel">
@@ -283,9 +276,10 @@
       <div class="item verlegemuster-item"><img class="lazyOwl" src="images/verlegemuster/24.jpg" alt='' data-source='24'/></div>
       <div class="item verlegemuster-item"><img class="lazyOwl" src="images/verlegemuster/25.jpg" alt='' data-source='25'/></div>
       <div class="item verlegemuster-item"><img class="lazyOwl" src="images/verlegemuster/26.jpg" alt='' data-source='26'/></div>
+      <div class="item verlegemuster-item" style="background:#333;" data-source='99'/></div>
     </div>
     
-    <div class="float-left"><h3 class="fui-arrow-right dark owl-next" style="margin-top:50px;"></h3></div>
+    <div class="float-left"><h3 class="fui-arrow-right dark owl-next" style="margin-top:30px;"></h3></div>
     
   
 </div>

@@ -141,12 +141,12 @@ footer.konfigurator{
 }
 #message-container{
 	position:absolute;
-	top:0px;
+	top:180px;
 	left:35%;
 	width:320px;
 	min-height:200px;
 	color:#fff;
-	background-color:#9c8c76;
+	background-color:#333;
 	opacity:0.0;
 	overflow:hidden;
 	display:none;
@@ -335,6 +335,7 @@ img.lazyOwl{
 #verlegeplan{position: absolute; display:none; background-color:#fff; top:0px; left:0px; z-index:500;}
 #verlegeplan-muster{min-height:450px;}
 .pdf-pattern{width:90%;}
+.img-pattern{width:80%;}
 
 @media print { 
 
@@ -424,7 +425,7 @@ footer.konfigurator{
 	width:350px;
 	min-height:250px;
 	color:#fff;
-	background-color:#9c8c76;
+	background-color:#333;
 	opacity:0.0;
 	overflow:hidden;
 	display:none;
@@ -635,6 +636,9 @@ footer.konfigurator{
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 
 h4.subtitle										{font-size:24px; line-height:30px; color:#000; margin:0 0 0 10px; font-style:italic; }
+
+
+
 }
 
 
@@ -642,6 +646,11 @@ h4.subtitle										{font-size:24px; line-height:30px; color:#000; margin:0 0 0
 /***** Phone (portrait 300px) *****/
 @media only screen and (max-width: 767px) {
 
+body{
+	margin: 0 0 100px 0;
+	overflow:hidden;
+    
+}
 h1 									        	{font-size:24px; line-height:24px; color:#000; text-transform:uppercase; }
 h2										        {font-size:20px; line-height:24px; color:#000; }
 h3										        {font-size:18px; line-height:22px; color:#000; }
@@ -656,7 +665,32 @@ p.made                                          {font-size:10px; text-transform:
 .gridster{
 min-height:0px;	
 }
-	
+
+#musterverlegungen-chooser{
+	min-height:100px;
+
+}
+#verlegeplan-muster{min-height:0px;}
+#message-container{
+	position:absolute;
+	top:0px;
+	left:22%;
+	width:320px;
+	min-height:200px;
+	color:#fff;
+	background-color:#333;
+	opacity:0.0;
+	overflow:hidden;
+	display:none;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+	height:100px;
+}	
 .verlegemuster-item{
 	margin: 15px;
 }
@@ -781,13 +815,16 @@ img.lazyOwl{
 	position:absolute;
 	width:480px;
 	left:0px;
-	top:280px;
+	top:290px;
 	background:#333;
     opacity:0.0;
 	display:none;
-	padding-top:30px;
+	padding-top:15px;
 	bottom:0;
 }	
+
+.pdf-pattern{width:60%;}
+.img-pattern{width:40%;}
 
 }
 

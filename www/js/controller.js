@@ -10,22 +10,167 @@ jQuery(document).ready(function(){
 	jQuery(window).resize(resize3DViewer);
 	resize3DViewer();
 	
-	init();	
-	
+    var lang = navigator.language.split("-");
+    var current_lang = (lang[0]);
+    
+    jQuery("body").attr("current_lang", current_lang);
+              	
+    jQuery("[data-translate]").each(function(key,value) {
+      jQuery(value).html(translate(current_lang, jQuery(value).attr("data-translate")));
+    })
 
+    init();
 });
 
 jQuery(window).load(function(){
+                   
+   
+   showMsgContainer("<h3 class='dark'>"+translate(jQuery("body").attr("current_lang"), "4")+"</h3>", "<ol>1." +translate(jQuery("body").attr("current_lang"), "5")+"</ol><ol>2." +translate(jQuery("body").attr("current_lang"), "6")+"</ol><ol>3." +translate(jQuery("body").attr("current_lang"), "7")+"</ol><ol>4." +translate(jQuery("body").attr("current_lang"), "8")+"</ol>", false);
 	
-	showMsgContainer("<h3 class='dark'>Herzlich willkommen im <br> Formpark-Konfigurator</h3>", "<ol>1. Gewünschte Verlegung wählen</ol><ol>2. Musterverlegung in den Raum legen</ol><ol>3. Farbe und Sortierung wählen</ol><ol>4. Raumsituation wählen</ol>", false);
-	
-  
-			
-
 });
+
+function translate(lang, id){
+	
+	switch(lang){
+        case "de":
+            switch(id){
+                case "1": return "Der Konfigurator";
+                case "2": return "Meine Wunsch-Verlegung";
+                case "3": return "In den Raum legen";
+                case "4": return "Herzlich willkommen im Formpark-Konfigurator";
+                case "5": return "Gewünschte Verlegung wählen";
+                case "6": return "Musterverlegung in den Raum legen";
+                case "7": return "Farbe und Sortierung wählen";
+                case "8": return "Raumsituation wählen";
+                case "9": return "Verlege-Datenblatt drucken";
+                case "10": return "Download Verlegeplan PDF";
+                case "11": return "Download Verlegeraster PDF";
+                case "12": return "Kein Formpark Muster gefunden";
+                case "13": return "Bitte wählen Sie zuerst ein Verlegemuster von unten aus.";
+                case "14": return "Wunsch Verlegung";
+                case "15": return "Ihre Musterauswahl wird aufbereitet.";
+                case "16": return "Raumansicht";
+                case "17": return "Die Raumansicht wird vorbereitet.";
+                case "18": return "Ihr Boden wird neu verlegt.";
+                case "19": return "Eiche 14";
+                case "20": return "Eiche 35";
+                case "21": return "Eiche 14 <br/> geräuchert";
+                case "22": return "Eiche <br/> Avorio 14";
+                case "23": return "Das Verlegedatenblatt";
+                
+			}
+        case "en":
+            switch(id){
+                case "1": return "The configurator";
+                case "2": return "My preferred installation-pattern";
+                case "3": return "Place into the room";
+                case "4": return "Welcome to the Formpark configurator";
+                case "5": return "Select preferred installation-pattern";
+                case "6": return "Place installation-pattern into the room";
+                case "7": return "Select colour and grading";
+                case "8": return "Select room situation";
+                case "9": return "Print installation data sheet";
+                case "10": return "Download installation data sheet";
+                case "11": return "Download grid pattern data sheet";
+                case "12": return "No Formpark pattern found";
+                case "13": return "Please select a pattern below.";
+                case "14": return "Preferred installation-pattern";
+                case "15": return "Your pattern selection is being processed.";
+                case "16": return "View of the room";
+                case "17": return "The view of the room is being prepared";
+                case "18": return "New installation-pattern of your floor";
+                case "19": return "Oak 14";
+                case "20": return "Oak 35";
+                case "21": return "Oak 14 <br/> smoked";
+                case "22": return "Oak <br/> Avorio 14";
+                case "23": return "The installation data sheet";
+            }
+        case "fr":
+            switch(id){
+                case "1": return "Le configurateur";
+                case "2": return "La pose de mes rêves";
+                case "3": return "Placer dans la pièce";
+                case "4": return "Bienvenue sur le configurateur Formpark";
+                case "5": return "Choisir le style de pose souhaité";
+                case "6": return "Placer le style de pose dans la pièce";
+                case "7": return "Choisir la teinte et le profil";
+                case "8": return "Choisir la configuration de pièce";
+                case "9": return "Imprimer la fiche technique de pose";
+                case "10": return "Télécharger la fiche technique de pose";
+                case "11": return "Télécharger la fiche technique du schéma";
+                case "12": return "Aucun style Formpark trouvé";
+                case "13": return "Veuillez sélectionner un style ci-dessous.";
+                case "14": return "Pose souhaitée";
+                case "15": return "Votre choix de style est en cours de traitement.";
+                case "16": return "Visualisation de la pièce";
+                case "17": return "La vue de la pièce est en cours de préparation.";
+                case "18": return "Votre sol est désormais posé.";
+                case "19": return "Chêne 14";
+                case "20": return "Chêne 35";
+                case "21": return "Chêne 14 <br/> fumé";
+                case "22": return "Chêne <br/> Avorio 14";
+                case "23": return "La fiche technique";
+
+            }
+        case "it":
+            switch(id){
+                case "1": return "Il Configuratore";
+                case "2": return "La posa che voglio";
+                case "3": return "Applica motivo nell'ambiente";
+                case "4": return "Benvenuti al configuratore Formpark!";
+                case "5": return "Selezionare la posa che si desidera";
+                case "6": return "Applicare il motivo nell'ambiente";
+                case "7": return "Selezionare colore e tipologia";
+                case "8": return "Selezionare situazione ambientale ";
+                case "9": return "Stampa scheda tecnica posa";
+                case "10": return "Scarica scheda tecnica posa";
+                case "11": return "Scarica scheda tecnica griglia";
+                case "12": return "Non è stato trovato nessun motivo per Formpark";
+                case "13": return "Seleziona un motivo in basso.";
+                case "14": return "Posa desiderata";
+                case "15": return "Il motivo che hai scelto viene preparato.";
+                case "16": return "Vista dell'ambiente";
+                case "17": return "La vista dell'ambiente viene preparata.";
+                case "18": return "Il tuo pavimento viene rivestito a nuovo.";
+                case "19": return "Quercia 14";
+                case "20": return "Quercia 35";
+                case "21": return "Quercia 14 <br/> affumicato";
+                case "22": return "Quercia <br/> Avorio 14";
+                case "23": return "La scheda tecnica";
+            }
+        default:
+            switch(id){
+                case "1": return "The configurator";
+                case "2": return "My preferred installation-pattern";
+                case "3": return "Place into the room";
+                case "4": return "Welcome to the Formpark configurator";
+                case "5": return "Select preferred installation-pattern";
+                case "6": return "Place installation-pattern into the room";
+                case "7": return "Select colour and grading";
+                case "8": return "Select room situation";
+                case "9": return "Print installation data sheet";
+                case "10": return "Download installation data sheet";
+                case "11": return "Download grid pattern data sheet";
+                case "12": return "No Formpark pattern found";
+                case "13": return "Please select a pattern below.";
+                case "14": return "Preferred installation-pattern";
+                case "15": return "Your pattern selection is being processed.";
+                case "16": return "View of the room";
+                case "17": return "The view of the room is being prepared";
+                case "18": return "New installation-pattern of your floor";
+                case "19": return "Oak 14";
+                case "20": return "Oak 35";
+                case "21": return "Oak 14 smoked";
+                case "22": return "Oak Avorio 14";
+                case "23": return "The installation data sheet";            }
+	}
+	
+}
+
 
 
 function init(){
+    
 	
   gridster = jQuery(".gridster > ul").gridster({
     widget_margins: [1, 1],
@@ -53,7 +198,16 @@ function init(){
     responsive: true
  
   
-  }); 
+  });
+    
+  jQuery(document).on('click', 'a[target="_blank"]', function(ev) {
+    var url;
+                      
+    ev.preventDefault();
+    url = jQuery(this).attr('href');
+    
+    window.open(url,  '_system', 'location=yes');
+  });
   
  
   jQuery('#fp780').click(function(){
@@ -153,7 +307,7 @@ function init(){
 	 
 	  if (jQuery('.gridster ul li').size() == 0){
 		 
-		 showMsgContainer("Kein Formpark Muster gefunden", "Bitte verlegen Sie ein in sich geschlossenes Muster.", false);
+		 showMsgContainer(translate(jQuery("body").attr("current_lang"), "12"), translate(jQuery("body").attr("current_lang"), "13"), false);
 		
 		
 	 } else{
@@ -162,7 +316,7 @@ function init(){
 	 jQuery("#newFloor").empty();
 	 
 	 var msg = this;
-	 var retrievedObj = showMsgContainer('Raumansicht', 'Die Raumansicht wird vorbereitet.', true);
+	 var retrievedObj = showMsgContainer(translate(jQuery("body").attr("current_lang"), "16"), translate(jQuery("body").attr("current_lang"), "17"), true);
 	 
 	 jQuery.when(retrievedObj).then(function(){
 
@@ -217,7 +371,7 @@ function init(){
 	 var id = parseInt(jQuery(this).attr('data-source'));
 	 closeMsgContainer();
 	 gridster.remove_all_widgets();
-	 showMsgContainer("Wunsch-Verlegung", "Ihre Musterauswahl wird aufbereitet.", true);
+	 showMsgContainer(translate(jQuery("body").attr("current_lang"), "14"), translate(jQuery("body").attr("current_lang"), "15"), true);
 	 
 	 setTimeout(function () {
 	   getMusterPreset(id);
@@ -241,7 +395,7 @@ function init(){
   
   jQuery('#eiche-14-strips').click(function(){
   
-    showMsgContainer("Eiche 14", "Ihr Boden wird neu verlegt.", true);
+    showMsgContainer(translate(jQuery("body").attr("current_lang"), "19"), translate(jQuery("body").attr("current_lang"), "18"), true);
 	setTimeout(function () {
        setParquetStripType(1);
 	   closeMsgContainer();
@@ -252,7 +406,7 @@ function init(){
 
   jQuery('#eiche-35-strips').click(function(){
   
-    showMsgContainer("Eiche 35", "Ihr Boden wird neu verlegt.", true);
+    showMsgContainer(translate(jQuery("body").attr("current_lang"), "20"), translate(jQuery("body").attr("current_lang"), "18"), true);
 	setTimeout(function () {
        setParquetStripType(2);
 	   closeMsgContainer();
@@ -262,7 +416,7 @@ function init(){
 
   jQuery('#eiche-14-ger-strips').click(function(){
   
-       showMsgContainer("Eiche 14 geräuchert", "Ihr Boden wird neu verlegt.", true);
+       showMsgContainer(translate(jQuery("body").attr("current_lang"), "21"), translate(jQuery("body").attr("current_lang"), "18"), true);
 	setTimeout(function () {
        setParquetStripType(3);
 	   closeMsgContainer();
@@ -273,7 +427,7 @@ function init(){
 
   jQuery('#eiche-24-ger-strips').click(function(){
   
-        showMsgContainer("Eiche 24 geräuchert", "Ihr Boden wird neu verlegt.", true);
+        showMsgContainer("Eiche 24 geräuchert", translate(jQuery("body").attr("current_lang"), "18"), true);
 	setTimeout(function () {
        setParquetStripType(4);
 	   closeMsgContainer();
@@ -284,7 +438,7 @@ function init(){
 
   jQuery('#eiche-14-avorio-strips').click(function(){
   
-        showMsgContainer("Eiche Avorio 14", "Ihr Boden wird neu verlegt.", true);
+        showMsgContainer(translate(jQuery("body").attr("current_lang"), "22"), translate(jQuery("body").attr("current_lang"), "18"), true);
 	setTimeout(function () {
        setParquetStripType(5);
 	   closeMsgContainer();
@@ -303,13 +457,13 @@ function init(){
 	 
 	 if (jQuery('.gridster ul li').size() == 0){
 		 
-		 showMsgContainer("Kein Formpark Muster gefunden", "Bitte verlegen Sie ein in sich geschlossenes Muster.");
+		 showMsgContainer(translate(jQuery("body").attr("current_lang"), "12"), translate(jQuery("body").attr("current_lang"), "13"));
 		
 		
 	 } else{
 	 
 	 jQuery("#verlegeplan-muster").html("<img data-id='"+preset+"' src='images/pdf/Verlegeraster_Muster_"+preset+".png' class='pdf-pattern' alt='Muster "+preset+"'/>");
-	 jQuery("#verlegeplan-facts").html("<a href='images/pdf/Verlegeraster_Muster_"+preset+".pdf' target='_blank'><p style='margin-right:20px;' class='btn float-left'>Download Verlegeplan PDF</p></a><a href='images/pdf/Verlegeraster_eigenes_Muster.pdf' target='_blank'><p class='btn float-left'>Download Verlegeraster PDF</p></a>");
+	 jQuery("#verlegeplan-facts").html("<a href='images/pdf/Verlegeraster_Muster_"+preset+".pdf' target='_blank'><p style='margin-right:20px;' class='btn float-left'>"+translate(jQuery("body").attr("current_lang"), "10")+"</p></a><a href='images/pdf/Verlegeraster_eigenes_Muster.pdf' target='_blank'><p class='btn float-left'>"+translate(jQuery("body").attr("current_lang"), "11")+"</p></a>");
 	 
 	 jQuery("#musterverlegungen-chooser").css('display', 'none');
 	 jQuery("#musterverlegungen-chooser").css('opacity', '0.0');
@@ -566,7 +720,7 @@ function closeMsgContainer(){
 	  
 	  }
 	  
-	  jQuery("#muster-container").html("<img data-id='"+musterID+"' src='images/verlegemuster/"+musterID+"-gross.png' class='img-pattern' alt='Muster "+musterID+"'/>")
+	  jQuery("#muster-container").html("<img data-id='"+musterID+"' src='images/verlegemuster/"+musterID+"-gross.png' class='img-pattern' alt='Muster "+musterID+"'/>");
   	  
 	  
 }
@@ -1771,7 +1925,6 @@ function openPreset25(){
   
 		  var widget = [
 		  
-
 		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 1, 1],
 		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 2, 5, 1],
 		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 1],
@@ -1859,7 +2012,7 @@ function openPreset26(){
 		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 7, 5],
 		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 1, 7],
 		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 3, 7],
-		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 5],
+		  ['<li src-strip="780" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 6, 5, 5],
 		  ['<li src-strip="520" orig-xy="h"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 2, 4, 7, 7],
 		  ['<li src-strip="780" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 6, 2, 9, 7],
 		  ['<li src-strip="520" orig-xy="q"><div class="control del func-delete-h"><p class="fui-cross"></p></div></li>', 4, 2, 17, 7],
@@ -1920,10 +2073,15 @@ function switchRoom(direction){
 		jQuery('#raum-moebel img').animate({
           opacity: 0.0
    
-        }, 3000, function() {
+        }, 2000, function() {
 		 jQuery('#raum-moebel img').attr('src', filename+act+".png");
-         jQuery('#raum-moebel img').css('opacity', '1.0');
-	 
+		 
+		 jQuery('#raum-moebel img').animate({
+           opacity:1.0
+		 },2000, function(){
+	       
+		 });
+         	 
     
        });
 		
@@ -1933,10 +2091,14 @@ function switchRoom(direction){
 	  jQuery('#raum-moebel img').animate({
           opacity: 0.0
    
-      }, 3000, function() {
+      }, 2000, function() {
 		  
 		 jQuery('#raum-moebel img').attr('src', filename+"1.png");
-	     jQuery('#raum-moebel img').css('opacity', '1.0');
+	     jQuery('#raum-moebel img').animate({
+           opacity:1.0	 
+		 },2000, function(){
+	       
+		 });
 	 
     
      });

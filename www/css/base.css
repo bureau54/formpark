@@ -176,8 +176,8 @@ img 									{ border:0; -ms-interpolation-mode:bicubic; }
 
 /***** Buttons  *****/
 
-a.btn, .btn 							{ margin:5px 0 5px 0; padding:4px 10px 4px 10px; display:inline-block; color:#fff; background-color:#9c8c76; cursor:pointer; }
-a:hover.btn, .btn:hover					{ text-decoration:none; color:#fff; background-color:#9c8c76; opacity:0.8; }
+a.btn, .btn 							{ margin:5px 0 5px 0; padding:4px 10px 4px 10px; display:inline-block; color:#fff; background-color:#333; cursor:pointer; }
+a:hover.btn, .btn:hover					{ text-decoration:none; color:#fff; background-color:#333; opacity:0.8; }
 .btn-footer                             { background:#fff; color:#9c8c76; opacity:0.8;}
 .btn-dark{background:#333; color:#fff; margin:0px;}
 /***** Forms *****/

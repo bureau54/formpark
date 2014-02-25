@@ -3,7 +3,10 @@
 * Copyright (c) 2013 ducksboard; Licensed MIT */
 
 .gridster {
-    position:relative;
+    position: absolute;
+	width:1200px;
+	opacity:0.0;
+	top:0px;
 }
 
 .gridster > * {
