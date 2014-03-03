@@ -3,6 +3,33 @@
  *
  */
 
+var app = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicity call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        
+        console.log('Received Event: ' + id);
+    }
+};
+
 
 jQuery(document).ready(function(){ 
     var gridster;
@@ -42,9 +69,9 @@ function translate(lang, id){
                 case "6": return "Musterverlegung in den Raum legen";
                 case "7": return "Farbe und Sortierung wählen";
                 case "8": return "Raumsituation wählen";
-                case "9": return "Verlege-Datenblatt drucken";
-                case "10": return "Download Verlegeplan PDF";
-                case "11": return "Download Verlegeraster PDF";
+                case "9": return "Verlege-Datenblatt";
+                case "10": return "Verlegeplan als E-Mail senden";
+                case "11": return "Verlegeraster als E-Mail senden";
                 case "12": return "Kein Formpark Muster gefunden";
                 case "13": return "Bitte wählen Sie zuerst ein Verlegemuster von unten aus.";
                 case "14": return "Wunsch Verlegung";
@@ -57,6 +84,9 @@ function translate(lang, id){
                 case "21": return "Eiche 14 <br/> geräuchert";
                 case "22": return "Eiche <br/> Avorio 14";
                 case "23": return "Das Verlegedatenblatt";
+                case "24": return "Untenstehend finden Sie das gewünschte Verlegmuster sowie das neutrale Verlegeraster.";
+				case "25": return "Verlegeplan als PDF Muster";
+				case "26": return "Verlegeraster als PDF";
                 
 			}
         case "en":
@@ -69,9 +99,9 @@ function translate(lang, id){
                 case "6": return "Place installation-pattern into the room";
                 case "7": return "Select colour and grading";
                 case "8": return "Select room situation";
-                case "9": return "Print installation data sheet";
-                case "10": return "Download installation data sheet";
-                case "11": return "Download grid pattern data sheet";
+                case "9": return "Installation data sheet";
+                case "10": return "Send installation data sheet by e-mail";
+                case "11": return "Send grid pattern data sheet by e-mail";
                 case "12": return "No Formpark pattern found";
                 case "13": return "Please select a pattern below.";
                 case "14": return "Preferred installation-pattern";
@@ -84,7 +114,10 @@ function translate(lang, id){
                 case "21": return "Oak 14 <br/> smoked";
                 case "22": return "Oak <br/> Avorio 14";
                 case "23": return "The installation data sheet";
-            }
+                case "24": return "See below for the selected installation pattern and the neutral installation grid.";
+ 				case "25": return "Installation plan as PDF pattern";
+				case "26": return "Grid pattern plan as PDF";
+           }
         case "fr":
             switch(id){
                 case "1": return "Le configurateur";
@@ -96,8 +129,8 @@ function translate(lang, id){
                 case "7": return "Choisir la teinte et le profil";
                 case "8": return "Choisir la configuration de pièce";
                 case "9": return "Imprimer la fiche technique de pose";
-                case "10": return "Télécharger la fiche technique de pose";
-                case "11": return "Télécharger la fiche technique du schéma";
+                case "10": return "Envoyer la fiche technique de pose par e-mail.";
+                case "11": return "Envoyer la fiche technique du schéma par e-mail";
                 case "12": return "Aucun style Formpark trouvé";
                 case "13": return "Veuillez sélectionner un style ci-dessous.";
                 case "14": return "Pose souhaitée";
@@ -110,6 +143,9 @@ function translate(lang, id){
                 case "21": return "Chêne 14 <br/> fumé";
                 case "22": return "Chêne <br/> Avorio 14";
                 case "23": return "La fiche technique";
+                case "24": return "Veuillez trouver ci-après le style de pose souhaité de même que le schéma de pose neutre.";
+ 				case "25": return "Plan de pose en format PDF schéma";
+				case "26": return "Plan du schéma en format PDF ";
 
             }
         case "it":
@@ -123,8 +159,8 @@ function translate(lang, id){
                 case "7": return "Selezionare colore e tipologia";
                 case "8": return "Selezionare situazione ambientale ";
                 case "9": return "Stampa scheda tecnica posa";
-                case "10": return "Scarica scheda tecnica posa";
-                case "11": return "Scarica scheda tecnica griglia";
+                case "10": return "Inviare la scheda tecnica per la posa via e-mail.";
+                case "11": return "Inviare la scheda tecnica griglia via e-mail";
                 case "12": return "Non è stato trovato nessun motivo per Formpark";
                 case "13": return "Seleziona un motivo in basso.";
                 case "14": return "Posa desiderata";
@@ -137,6 +173,9 @@ function translate(lang, id){
                 case "21": return "Quercia 14 <br/> affumicato";
                 case "22": return "Quercia <br/> Avorio 14";
                 case "23": return "La scheda tecnica";
+                case "24": return "Qui sotto trovate il motivo di posa desiderato e la griglia di posa neutra.";
+ 				case "25": return "Schema di posa in formato PDF scheda";
+				case "26": return "Schema griglia in formato PDF ";
             }
         default:
             switch(id){
@@ -149,8 +188,8 @@ function translate(lang, id){
                 case "7": return "Select colour and grading";
                 case "8": return "Select room situation";
                 case "9": return "Print installation data sheet";
-                case "10": return "Download installation data sheet";
-                case "11": return "Download grid pattern data sheet";
+                case "10": return "Send installation data sheet by e-mail";
+                case "11": return "Send grid pattern data sheet by e-mail";
                 case "12": return "No Formpark pattern found";
                 case "13": return "Please select a pattern below.";
                 case "14": return "Preferred installation-pattern";
@@ -162,7 +201,11 @@ function translate(lang, id){
                 case "20": return "Oak 35";
                 case "21": return "Oak 14 smoked";
                 case "22": return "Oak Avorio 14";
-                case "23": return "The installation data sheet";            }
+                case "23": return "The installation data sheet";
+                case "24": return "See below for the selected installation pattern and the neutral installation grid.";
+ 				case "25": return "Installation plan as PDF pattern";
+				case "26": return "Grid pattern plan as PDF";
+           }
 	}
 	
 }
@@ -206,7 +249,7 @@ function init(){
     ev.preventDefault();
     url = jQuery(this).attr('href');
     
-    window.open(url,  '_system', 'location=yes');
+    window.open(url,  '_blank', 'location=no');
   });
   
  
@@ -461,9 +504,13 @@ function init(){
 		
 		
 	 } else{
-	 
-	 jQuery("#verlegeplan-muster").html("<img data-id='"+preset+"' src='images/pdf/Verlegeraster_Muster_"+preset+".png' class='pdf-pattern' alt='Muster "+preset+"'/>");
-	 jQuery("#verlegeplan-facts").html("<a href='images/pdf/Verlegeraster_Muster_"+preset+".pdf' target='_blank'><p style='margin-right:20px;' class='btn float-left'>"+translate(jQuery("body").attr("current_lang"), "10")+"</p></a><a href='images/pdf/Verlegeraster_eigenes_Muster.pdf' target='_blank'><p class='btn float-left'>"+translate(jQuery("body").attr("current_lang"), "11")+"</p></a>");
+     
+     var funcCall = "sendEmail" + "(" + preset + ");";
+         
+		 
+     jQuery("#verlegeplan-muster").html("<img data-id='"+preset+"' src='images/pdf/Verlegeraster_Muster_"+preset+".png' class='pdf-pattern' alt='Muster "+preset+"'/>");
+	 jQuery("#verlegeplan-facts").html("<p onclick='javascript:"+funcCall+"' style='margin-right:20px;' class='btn float-left'>"+translate(jQuery("body").attr("current_lang"), "10")+"</p><p  onclick='javascript:"+funcCall+"' class='btn float-left'>"+translate(jQuery("body").attr("current_lang"), "11")+"</p>");
+     	 	  
 	 
 	 jQuery("#musterverlegungen-chooser").css('display', 'none');
 	 jQuery("#musterverlegungen-chooser").css('opacity', '0.0');
@@ -544,44 +591,7 @@ function init(){
     
   });
   
-  /*
-    Defining our variables
-        world and viewport are DOM elements,
-        worldXAngle and worldYAngle are floats that hold the world rotations,
-        d is an int that defines the distance of the world from the camera 
-
-var world = document.getElementById( 'world' ),
-    viewport = document.getElementById( 'viewport' ),
-    worldXAngle = 0,
-    worldYAngle = 0,
-    d = 0;
- 
-/*
-    Event listener to transform mouse position into angles 
-    from -180 to 180 degress, both vertically and horizontally
-
-window.addEventListener( 'mousemove', function( e ) {
-    worldYAngle = -( .5 - ( e.clientX / window.innerWidth ) ) * 180;
-    worldXAngle = ( .5 - ( e.clientY / window.innerHeight ) ) * 180;
-    updateView();
-} );
- 
-
-    Changes the transform property of world to be
-    translated in the Z axis by d pixels,
-    rotated in the X axis by worldXAngle degrees and
-    rotated in the Y axis by worldYAngle degrees.
-
-function updateView() {
-    world.style.transform = 'translateZ( ' + d + 'px ) \
-        rotateX( ' + worldXAngle + 'deg) \
-        rotateY( ' + worldYAngle + 'deg)';
-}
-*/
-  
-  
-  
-  var checkOrientation = function() {
+   var checkOrientation = function() {
     if (window.orientation == 0){
 	  
 	  jQuery('.overlay-pattern').css('width', jQuery(window).width()+'px');
@@ -607,6 +617,27 @@ function updateView() {
    
 	
 
+}
+
+function sendEmail(preset){
+  
+  var emailHeaderPDF = "FORMPARK";
+  var emailSubHeader = translate(jQuery("body").attr("current_lang"), "25");
+  var emailBodyText = translate(jQuery("body").attr("current_lang"), "24");
+  var linkTextPDF = translate(jQuery("body").attr("current_lang"), "25")+ " " + preset;
+  var linkTextPattern = translate(jQuery("body").attr("current_lang"), "26");
+
+
+  var emailPDF = "http://www.formpark.bauwerk.com/konfigurator/en/images/pdf/Verlegeraster_Muster_"+preset+".pdf";
+  var emailPDFPattern ="http://www.formpark.bauwerk.com/konfigurator/en/images/pdf/Verlegeraster_eigenes_Muster.pdf";
+
+
+window.plugin.email.open({
+    to:      [''],
+    subject: 'Formpark',
+    body:    '<h1>'+emailHeaderPDF+'</h1><p>'+emailSubHeader+'</p><p>'+emailBodyText+'</p><a href='+emailPDF+'><p>'+linkTextPDF+'</p></a><a href='+emailPDFPattern+'><p>'+linkTextPattern+'</p></a><p>Bauwerk Parkett AG</p><p>Neudorfstrasse 49</p><p>CH-9430 St. Margrethen</p>',
+    isHtml:  true
+    });
 }
 
 function showMsgContainer(headerValue, bodyValue, showLoader){
