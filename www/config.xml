@@ -65,6 +65,6 @@
     <access origin="*"/> <!-- allow local pages -->
 	
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-	<<gap:plugin name="de.appplant.cordova.plugin.email-composer" />
+	<gap:plugin name="de.appplant.cordova.plugin.email-composer" />
 
 </widget>
