@@ -65,8 +65,6 @@
     <access origin="*"/> <!-- allow local pages -->
 	
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-	<feature name="EmailComposer">
-        <param name="ios-package" value="APPEmailComposer" />
-    </feature>
+	<<gap:plugin name="de.appplant.cordova.plugin.email-composer" />
 
 </widget>
